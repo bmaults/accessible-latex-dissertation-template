@@ -96,6 +96,7 @@ However, you do **not** need to use `\accessiblefigure` as the usual LaTeX `figu
   \caption{Caption explaining how the figure is used in the dissertation.}
   \label{fig:example}
 \end{figure}
+```
 
 Write alt text that explains the important content of the figure. Do not use equations as screenshots unless there is no reasonable alternative.
 

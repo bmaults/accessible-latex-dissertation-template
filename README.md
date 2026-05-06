@@ -127,20 +127,22 @@ Before checking any of the following tips, ask yourself this: did I use LuaLaTeX
 Use a short math-free caption for the List of Figures or List of Tables:
 
 ```latex
-\caption[Short text caption]{Full caption with \( math \).}
+\caption[The Pythagorean Theorem]{The Pythagorean Theorem says \(a^2 + b^2 = c^2.\) (The first part in square brackets appears in the TOC, the second part in the thesis itself.)}
 ```
 
-This avoids putting complex math into the automatically generated lists.
+This avoids putting complex math into the automatically generated lists, allowing the full caption under the figure to contain mathematical notation while keeping the List of Figures easier for validation tools and assistive technologies to process. You will get errors in VeraPDF if you do not use the above structure, even if the document compiles and looks fine to you.
 
 ### A section title contains math
+
+The same idea as the above applies to section headings and chapter headings. If a heading contains mathematics, Unicode symbols, or unusual characters, consider using a simpler text version in the optional argument. Headings and captions are reused in bookmarks, the table of contents, the list of figures, and the list of tables, so simple text versions are often more reliable.
 
 Use a short math-free optional title:
 
 ```latex
-\section[Short text title]{Full title with \( math \)}
+\section[A proof of the Pythagorean Theorem]{A proof of the Pythagorean Theorem, \( a^2 + b^2 = c^2\)}
 ```
 
-Math in section titles can cause problems in bookmarks, the table of contents, and PDF validation.
+General principle: math in section titles can cause problems in bookmarks, the table of contents, and PDF validation.
 
 ### VeraPDF reports `.notdef` glyph errors
 

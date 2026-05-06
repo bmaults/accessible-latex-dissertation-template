@@ -10,6 +10,18 @@ dissertation-main-accessible.tex
 
 use LuaLaTeX (not pdfLaTeX). I use TeXShop.
 
+## Downloading the template
+
+To download the template as a zipped folder:
+
+1. Click the green **Code** button near the top of this GitHub page.
+2. Choose **Download ZIP**.
+3. Unzip the folder on your computer.
+4. Open `dissertation-main-accessible.tex`.
+5. Compile with LuaLaTeX.
+
+You do not need to know Git in order to use this template.
+
 ## Main files
 
 | File | Purpose |

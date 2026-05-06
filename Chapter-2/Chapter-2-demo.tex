@@ -1,0 +1,133 @@
+\chapter{SYNTHESIS AND CHARACTERIZATION OF A MODEL ORGANIC COMPOUND}
+\label{chap-two}
+
+\section{Purpose of This Sample Chapter}
+\label{sec:organic-purpose}
+
+This chapter is written as a short example of how a dissertation chapter in organic chemistry might organize a synthesis, reaction optimization, and characterization discussion in an accessible LaTeX document. Here are two sample citations \citep{sample:organic-methods} and \citep{sample:nmr-reporting}.
+
+Organic chemistry chapters often move between narrative explanation, reaction schemes, tabular summaries, and compact characterization data. The accessibility goal is the same as in any other discipline: do not rely on a picture alone. A reaction scheme should have a caption and alt text, a table should use real rows and columns, and important observations from a spectrum should be described in nearby text.
+
+\section{Reaction Design}
+\label{sec:reaction-design}
+
+As a model example, consider the reduction of acetophenone to 1-phenylethanol. The reaction is common enough to be recognizable, but simple enough to be used in a template without requiring a specialized chemistry drawing package. Figure~\ref{fig:model-reduction-scheme} gives a simplified reaction scheme.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=2cm,
+  alt={A simplified reaction scheme showing acetophenone, labeled compound 1, converted to 1-phenylethanol, labeled compound 2. The arrow is labeled sodium borohydride in methanol, beginning at zero degrees Celsius and warming to room temperature, followed by aqueous workup.}
+]
+  \node[draw,rounded corners,align=center,minimum width=3.1cm,minimum height=1.2cm] (start) at (0,0)
+    {\(\mathrm{PhCOCH_3}\)\\ acetophenone\\ \textbf{1}};
+  \node[draw,rounded corners,align=center,minimum width=3.1cm,minimum height=1.2cm] (product) at (7.1,0)
+    {\(\mathrm{PhCH(OH)CH_3}\)\\ 1-phenylethanol\\ \textbf{2}};
+  \draw[->,very thick] (start) -- node[above,align=center]
+    {\(\mathrm{NaBH_4}\), \(\mathrm{MeOH}\)} node[below,align=center]
+    {\(0^{\circ}\mathrm{C}\) to room\\temperature;\\ aqueous workup} (product);
+\end{tikzpicture}
+\caption{A simplified reaction scheme for reducing acetophenone to 1-phenylethanol. A student preparing a real organic chemistry dissertation would usually replace this text-based scheme with a properly drawn chemical structure and an equally descriptive alternative text.}
+\label{fig:model-reduction-scheme}
+\end{figure}
+
+The reaction is an example of nucleophilic hydride delivery to a ketone. In words, a hydride equivalent adds to the carbonyl carbon, and protonation during workup gives the corresponding secondary alcohol. If the stereochemical outcome matters for the research question, then the chapter should say whether the product is racemic, enantioenriched, or isolated as a single stereoisomer. In this short example, the product is treated as racemic.
+
+\section{General Experimental Approach}
+\label{sec:general-experimental-approach}
+
+A typical experimental section gives enough information for a trained chemist to understand what was done and, when appropriate, repeat the experiment. It usually includes the scale, solvent, temperature, atmosphere, purification method, yield, and characterization data. The prose should be compact, but not cryptic.
+
+For example, the following paragraph gives a template-style description of the model reaction. The quantities are included only as examples and should be checked before being used in any actual experiment.
+
+\begin{quote}
+A flame-dried round-bottom flask equipped with a magnetic stir bar was charged with acetophenone \textbf{1} (1.00 mmol) and methanol (5 mL). The solution was cooled to \(0^{\circ}\mathrm{C}\), and sodium borohydride (1.20 mmol) was added portionwise. The reaction mixture was allowed to warm to room temperature and was stirred until thin-layer chromatography indicated consumption of the starting material. The reaction was quenched with saturated aqueous ammonium chloride, extracted with ethyl acetate, dried over sodium sulfate, filtered, and concentrated under reduced pressure. Purification by flash column chromatography gave 1-phenylethanol \textbf{2} as a colorless oil.
+\end{quote}
+
+This kind of paragraph contains several accessibility concerns. Abbreviations such as TLC should be spelled out on first use. Chemical hazards and specialized procedures should not be hidden in a figure. If color changes, precipitate formation, or chromatographic behavior are important, they should be described in text rather than only shown in a photograph.
+
+\section{Optimization Data}
+\label{sec:optimization-data}
+
+Reaction optimization is often summarized in a table. Table~\ref{tab:organic-optimization} gives a small example. The table uses real text, real column headers, and a visible caption. It is not a screenshot of a spreadsheet.
+
+\begin{table}[htbp]
+\centering
+\caption{Example optimization results for the model reduction of acetophenone. The data are illustrative and are included to show accessible table structure.}
+\label{tab:organic-optimization}
+\begin{tabular}{p{0.12\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.16\textwidth}p{0.18\textwidth}}
+\toprule
+\textbf{Entry} & \textbf{Hydride source} & \textbf{Solvent} & \textbf{Temperature} & \textbf{Isolated yield} \\
+\midrule
+1 & \(\mathrm{NaBH_4}\) & Methanol & Room temperature & 82\% \\
+2 & \(\mathrm{NaBH_4}\) & Ethanol & Room temperature & 76\% \\
+3 & \(\mathrm{NaBH_4}\) & Methanol & \(0^{\circ}\mathrm{C}\) to room temperature & 88\% \\
+4 & \(\mathrm{LiAlH_4}\) & Diethyl ether & \(0^{\circ}\mathrm{C}\) & 71\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the narrative following a table, describe the main pattern rather than forcing readers to infer the conclusion from the table alone. In this example, entry 3 gives the highest isolated yield under the tested conditions. The lower yield in ethanol may reflect slower reduction, while the use of lithium aluminum hydride gives no advantage for this simple substrate.
+
+\section{Characterization Data}
+\label{sec:characterization-data}
+
+Characterization data are often compact, but they should still be readable. A student should define unfamiliar abbreviations and explain which data support the structural assignment. For example, proton nuclear magnetic resonance spectroscopy, often abbreviated \({}^{1}\mathrm{H}\) NMR, can distinguish the methyl group and the benzylic proton in 1-phenylethanol. Carbon nuclear magnetic resonance spectroscopy, or \({}^{13}\mathrm{C}\) NMR, gives complementary evidence for the aromatic carbons and the alcohol-bearing carbon.
+
+\begin{table}[htbp]
+\centering
+\caption{Example characterization summary for 1-phenylethanol. The values are illustrative placeholders for a template and should be replaced with verified experimental values.}
+\label{tab:characterization-summary}
+\begin{tabular}{p{0.20\textwidth}p{0.66\textwidth}}
+\toprule
+\textbf{Technique} & \textbf{Example observation} \\
+\midrule
+\({}^{1}\mathrm{H}\) NMR & Aromatic protons appear near \(\delta 7.2\)--\(7.4\). The benzylic proton appears downfield relative to the methyl group. \\
+\({}^{13}\mathrm{C}\) NMR & Aromatic carbon signals and an oxygen-bearing benzylic carbon are observed. \\
+Infrared spectroscopy & A broad absorption consistent with an alcohol \(\mathrm{O-H}\) stretch is observed. \\
+High-resolution mass spectrometry & The measured mass should be reported with the calculated mass for the proposed molecular formula. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A short characterization paragraph might read as follows:
+
+\begin{quote}
+Compound \textbf{2} was obtained as a colorless oil. The \({}^{1}\mathrm{H}\) NMR spectrum showed a set of aromatic resonances and signals consistent with a benzylic methine proton and a methyl group. The infrared spectrum contained a broad absorption consistent with an alcohol functional group. These data support assignment of the reduced alcohol product rather than the starting ketone.
+\end{quote}
+
+For a real dissertation, the student should replace this paragraph with the full characterization format expected by the discipline, research group, and journal style. The key accessibility point is that the text should state the conclusion supported by the data. A spectrum image may be useful, but it should not be the only place where the structural evidence is communicated.
+
+\section{A Small Stoichiometric Calculation}
+\label{sec:stoichiometric-calculation}
+
+Organic chemistry chapters sometimes include short calculations, especially when discussing scale, equivalents, yield, or selectivity. For example, the percent yield is computed from the isolated amount and the theoretical amount:
+
+\begin{equation}
+\text{percent yield}=\frac{\text{actual yield}}{\text{theoretical yield}}\cdot 100\%.
+\label{eq:percent-yield}
+\end{equation}
+
+If the theoretical yield is \(122.17\,\mathrm{mg}\) and the isolated product is \(107.5\,\mathrm{mg}\), then
+\begin{align}
+\text{percent yield}
+  &= \frac{107.5\,\mathrm{mg}}{122.17\,\mathrm{mg}}\cdot 100\% \\
+  &= 88.0\%.
+\label{eq:percent-yield-example}
+\end{align}
+This calculation is included as text-based mathematics rather than as an image, so it can be enlarged, searched, copied, and interpreted by assistive technology more reliably than a screenshot.
+
+\section{Accessibility Notes for Chemistry Content}
+\label{sec:chemistry-accessibility-notes}
+
+Chemistry documents can be difficult to make accessible because important meaning is often packed into visual structures, spectra, and schemes. The following practices help:
+\begin{enumerate}
+  \item Give each reaction scheme a caption that states the purpose of the scheme.
+  \item Provide alt text that identifies the starting material, product, reagents, and main transformation.
+  \item Summarize the important conclusion from each spectrum in text.
+  \item Use real tables for optimization and screening data.
+  \item Avoid using a screenshot when a table, equation, or short text description would work.
+\end{enumerate}
+
+These habits do not replace discipline-specific expectations. They make those expectations easier to meet in a way that is more usable for readers with different access needs.

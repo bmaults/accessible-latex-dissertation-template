@@ -1,0 +1,235 @@
+% ============================================================
+% ACCESSIBLE PDF SETTINGS
+%
+% The settings below are important for the final accessibility build,
+% but they can make large dissertations compile very slowly.
+%
+% For routine writing and editing, you may comment out this whole
+% \DocumentMetadata block.
+%
+% Turn it back on when you are:
+%   - checking the final structure of the PDF,
+%   - testing accessibility,
+%   - testing PDF/A-4f or PDF/UA-2 compliance,
+%   - preparing the version to submit or share.
+%
+% I strongly recommend that you address accessibility issues every chapter.
+% Do not wait until the thesis is complete to begin accessibility remediation.
+% ============================================================
+
+\DocumentMetadata{
+  pdfversion=2.0,        % PDF 2.0 output. Keep for final PDF/UA-2 work.
+  lang=en-US,            % Sets the document language. Keep for final accessibility work.
+  tagging=on,            % SLOW: turns on tagged PDF structure.
+  pdfstandard=ua-2,      % Final accessibility target.
+  pdfstandard=a-4f,      % Final archival target.
+  tagging-setup={
+    math/setup={mathml-AF,mathml-SE},
+                          % VERY SLOW in large math documents.
+                          % Generates MathML tagging for equations.
+                          % Important for the final accessible version.
+    table/header-rows=1   % Tags the first row of tables as headers.
+  }
+}
+
+\documentclass[12pt,phd,onehalfspacing]{ncsuthesis}
+
+%% -------------------------------------------------------------------------- %%
+%% Core packages for the dissertation template
+%% -------------------------------------------------------------------------- %%
+%% Keep this list small. Required accessibility and ETD formatting settings are
+%% loaded below from ncsu-required.tex.
+
+\usepackage{ncsu-accessibility}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{amsthm}     % Provides the proof environment.
+\usepackage{textcomp}
+\usepackage{natbib}
+
+%% Citations should be of the form ``author year'' instead of ``author, year''.
+\bibpunct{(}{)}{;}{a}{}{,}
+
+%% -------------------------------------------------------------------------- %%
+%% Basic thesis formatting
+%% -------------------------------------------------------------------------- %%
+
+\dispositionformat{\bfseries}
+
+%% NC State requires most text to be the same size as the body text.
+%% Preliminary-page headings should therefore stay at \normalsize unless the
+%% Graduate School approves a different style.
+\headingformat{\normalsize\MakeUppercase}
+
+\frenchspacing
+
+%% -------------------------------------------------------------------------- %%
+%% Student information
+%% -------------------------------------------------------------------------- %%
+%% Put title, student name, committee members, program, degree year, and PDF
+%% metadata fields in student-information.tex.
+
+\input{student-information}
+
+%% -------------------------------------------------------------------------- %%
+%% Required NC State accessible ETD setup
+%% -------------------------------------------------------------------------- %%
+%% This file contains settings that should remain active for the final
+%% accessible NC State thesis/dissertation build.
+%%
+%% It includes:
+%%   - hyperlink and PDF metadata setup,
+%%   - PDF bookmark setup,
+%%   - microtype,
+%%   - NC State Graduate School section/caption formatting,
+%%   - final-ETD-safe theorem-like environments.
+%%
+%% Do not put draft-only design choices in ncsu-required.tex. Those belong in
+%% optional-accessible.tex.
+
+\input{ncsu-required}
+
+%% -------------------------------------------------------------------------- %%
+%% Student-specific macros and compatibility packages
+%% -------------------------------------------------------------------------- %%
+%% Put student-specific packages and commands in student-macros.tex.
+%% This file should not contain required template settings.
+%%
+%% This is loaded before optional-accessible.tex so compatibility packages such
+%% as accents are in place before optional math fonts are selected.
+
+\IfFileExists{student-macros.tex}{\input{student-macros}}{}
+
+%% -------------------------------------------------------------------------- %%
+%% Optional visual choices
+%% -------------------------------------------------------------------------- %%
+%% This file contains optional visual choices only, such as:
+%%   - optional chapter heading style,
+%%   - optional font choices,
+%%   - optional pretty theorem cards.
+%%
+%% Font choices are loaded here, after student-macros.tex and before luamml.
+%% This order allows students to use compatibility packages such as accents
+%% while still using optional text-and-math fonts such as Libertinus.
+%%
+%% You may comment out this file for the most conservative final ETD build.
+
+\IfFileExists{optional-accessible.tex}{\input{optional-accessible}}{}
+
+%% -------------------------------------------------------------------------- %%
+%% Apply optional visual choices
+%% -------------------------------------------------------------------------- %%
+%% The optional file defines visual choices. We apply them here because chapter
+%% headings and theorem-card styling depend on commands and colors defined by
+%% ncsu-required.tex.
+
+\providecommand{\NCSUApplyOptionalVisualChoices}{}
+\NCSUApplyOptionalVisualChoices
+
+%%----------------------------------------------------------------------------%%
+%% MathML support
+%%----------------------------------------------------------------------------%%
+%% This supports the math accessibility settings from \DocumentMetadata.
+%%
+%% Keep this after optional-accessible.tex so optional font choices, such as
+%% Libertinus or STIX Two, are applied before luamml patches the math setup.
+
+\usepackage{luamml}
+
+%% -------------------------------------------------------------------------- %%
+%% Begin document
+%% -------------------------------------------------------------------------- %%
+
+\begin{document}
+
+%% -------------------------------------------------------------------------- %%
+%% Front matter
+%% -------------------------------------------------------------------------- %%
+%% The front matter contains the pages that come before the main chapters.
+%% In this template, that includes the student and thesis information, abstract,
+%% dedication, biography, acknowledgements, and the automatically generated
+%% lists.
+%%
+%% The table of contents, list of tables, and list of figures are generated
+%% automatically by LaTeX from the chapter titles, section titles, table
+%% captions, and figure captions in the thesis.
+%%
+%% If the table of contents, list of tables, or list of figures looks incomplete,
+%% compile the document with LuaLaTeX several times. These lists are built from
+%% information saved during earlier compile runs.
+
+\frontmatter
+
+\include{front-accessible}
+
+%% -------------------------------------------------------------------------- %%
+%% Main matter
+%% -------------------------------------------------------------------------- %%
+%% The main matter contains the numbered chapters of the thesis or dissertation.
+%% After this point, LaTeX switches to Arabic page numbering and chapter-based
+%% numbering.
+
+\mainmatter
+
+%% Include each chapter file below.
+%% Each chapter file should usually begin with a \chapter{...} command.
+%%
+%% You may add, remove, rename, or comment out chapter files as needed.
+%% If you rename a chapter folder or file, make sure the path below matches.
+
+\include{Chapter-1/Chapter-1-demo}
+\include{Chapter-2/Chapter-2-demo}
+\include{Chapter-3/Chapter-3-demo}
+\include{Chapter-4/Chapter-4-demo}
+\include{Chapter-5/Chapter-5-demo}
+\include{Chapter-6/Chapter-6-demo}
+
+%% -------------------------------------------------------------------------- %%
+%% Bibliography
+%% -------------------------------------------------------------------------- %%
+%% Run BibTeX on the main file name:
+%%
+%%   lualatex dissertation-main-accessible
+%%   bibtex dissertation-main-accessible
+%%   lualatex dissertation-main-accessible
+%%   lualatex dissertation-main-accessible
+
+\bibliography{bibliography}
+\bibliographystyle{apalike}
+
+%% -------------------------------------------------------------------------- %%
+%% Appendices
+%% -------------------------------------------------------------------------- %%
+%% \restoregeometry resets the page layout to the original thesis margins after
+%% a temporary change made with \newgeometry{...}. It is included here as a
+%% safeguard in case a chapter used temporary geometry settings.
+
+\restoregeometry
+
+%% \appendix tells LaTeX that the remaining chapters are appendices.
+%% After this point, chapter numbering usually switches from numbers to letters:
+%% Chapter 1, Chapter 2, ... become Appendix A, Appendix B, ...
+
+\appendix
+
+%% Include appendix files below, or delete/comment them out.
+
+\include{Appendix-A/Appendix-A}
+\include{Appendix-B/Appendix-B}
+
+%% This second \restoregeometry is another safeguard. For best practice, any
+%% temporary geometry change should be restored inside the same file where it was
+%% changed, but this helps prevent accidental margin changes from carrying into
+%% the back matter.
+
+\restoregeometry
+
+%% -------------------------------------------------------------------------- %%
+%% Back matter
+%% -------------------------------------------------------------------------- %%
+%% \backmatter marks final material after the appendices. It is safe to keep,
+%% even if the template does not currently include additional back matter pages.
+
+\backmatter
+
+\end{document}

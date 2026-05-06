@@ -1,0 +1,166 @@
+%%----------------------------------------------------------------------------%%
+%% NC State required accessible ETD setup
+%%----------------------------------------------------------------------------%%
+%% This file contains settings that should remain active for the final
+%% accessible NC State thesis/dissertation build.
+%%
+%% Do not put draft-only design choices here. Those belong in
+%% optional-accessible.tex.
+%%----------------------------------------------------------------------------%%
+
+%%----------------------------------------------------------------------------%%
+%% Link colors and shared colors
+%%----------------------------------------------------------------------------%%
+
+\usepackage{xcolor}
+
+\definecolor{NCSULinkBlue}{HTML}{005389}
+\definecolor{NCSUReynoldsRed}{HTML}{990000}
+
+\definecolor{NCSUSoftBlue}{HTML}{EEF6FB}
+\definecolor{NCSUSoftBlueTitle}{HTML}{D9ECF7}
+\definecolor{NCSUBlueBorder}{HTML}{2F5D7C}
+
+\definecolor{NCSUSoftGreen}{HTML}{F0F7F2}
+\definecolor{NCSUSoftGreenTitle}{HTML}{DCEFE2}
+\definecolor{NCSUGreenBorder}{HTML}{3F6F4F}
+
+\definecolor{NCSUBoxGray}{HTML}{F6F6F6}
+\definecolor{NCSUBoxGrayTitle}{HTML}{EDEDED}
+
+%%----------------------------------------------------------------------------%%
+%% Hyperlinks, PDF bookmarks, and PDF metadata
+%%----------------------------------------------------------------------------%%
+%% pdfdisplaydoctitle=true tells PDF viewers to display the document title
+%% instead of the file name when possible.
+%%
+%% The visible title page is not enough for accessibility checkers. The PDF also
+%% needs a title in the document properties. Do not edit the student name or
+%% dissertation title here. Those values are set in student-information.tex.
+
+\usepackage[
+  unicode=true,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  linktoc=all,
+  colorlinks=true,
+  linkcolor=NCSULinkBlue,
+  citecolor=NCSULinkBlue,
+  urlcolor=NCSULinkBlue,
+  pdfdisplaydoctitle=true,
+  pdftitle={\NCSUThesisTitle},
+  pdfauthor={\NCSUStudentFullName},
+  pdfsubject={\NCSUPDFSubject},
+  pdfkeywords={\NCSUPDFKeywords},
+  pdfcreator={LuaLaTeX with LaTeX PDF management and tagpdf}
+]{hyperref}
+
+\usepackage{bookmark}
+
+%%----------------------------------------------------------------------------%%
+%% Microtypography
+%%----------------------------------------------------------------------------%%
+%% Microtype improves spacing and line breaks. This is mainly a readability
+%% improvement and should not change the structure of the document.
+
+\usepackage{microtype}
+
+%%----------------------------------------------------------------------------%%
+%% NC State Graduate School ETD formatting
+%%----------------------------------------------------------------------------%%
+%% NC State requires most text to be the same font size as the body text.
+%% Apart from chapter headers and captions for tables and figures, section-level
+%% headings should not be larger than the body text.
+
+\sectionfont{\normalsize\bfseries}
+\subsectionfont{\normalsize\bfseries}
+\subsubsectionfont{\normalsize\bfseries}
+\paragraphfont{\normalsize\bfseries}
+\subparagraphfont{\normalsize\bfseries}
+
+\captionsetup{
+  font=normalsize,
+  labelfont=bf
+}
+
+%%----------------------------------------------------------------------------%%
+%% Required theorem-like environments
+%%----------------------------------------------------------------------------%%
+%% The demo chapters and many math dissertations use theorem-like environments.
+%% These definitions are intentionally plain and final-ETD-safe:
+%%   - no tcolorbox,
+%%   - no amsthm theorem-like tagging structure,
+%%   - no colored backgrounds.
+%%
+%% Optional visual changes to these environments belong in optional-accessible.tex.
+
+\newcounter{ncsuStatement}[chapter]
+\renewcommand{\thencsuStatement}{\thechapter.\arabic{ncsuStatement}}
+
+\newcommand{\NCSUStatementTitle}[3]{%
+  \textbf{#1~#2%
+  \if\relax\detokenize{#3}\relax
+  \else
+    : #3%
+  \fi.}%
+}
+
+\newcommand{\NCSUStatementBegin}[4]{%
+  \refstepcounter{ncsuStatement}%
+  \par\addvspace{12pt}%
+  \noindent\NCSUStatementTitle{#1}{\thencsuStatement}{#2}\quad
+  \begingroup
+  \ignorespaces
+}
+
+\newcommand{\NCSUStatementEnd}{%
+  \par
+  \endgroup
+  \par\addvspace{12pt}%
+}
+
+\DeclareDocumentEnvironment{definition}{O{}}{%
+  \NCSUStatementBegin{Definition}{#1}{NCSUSoftGreenTitle}{NCSUGreenBorder}%
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{theorem}{O{}}{%
+  \NCSUStatementBegin{Theorem}{#1}{NCSUSoftBlueTitle}{NCSUBlueBorder}%
+  \itshape
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{lemma}{O{}}{%
+  \NCSUStatementBegin{Lemma}{#1}{NCSUSoftBlueTitle}{NCSUBlueBorder}%
+  \itshape
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{proposition}{O{}}{%
+  \NCSUStatementBegin{Proposition}{#1}{NCSUSoftBlueTitle}{NCSUBlueBorder}%
+  \itshape
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{corollary}{O{}}{%
+  \NCSUStatementBegin{Corollary}{#1}{NCSUSoftBlueTitle}{NCSUBlueBorder}%
+  \itshape
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{example}{O{}}{%
+  \NCSUStatementBegin{Example}{#1}{NCSUBoxGrayTitle}{black!55}%
+}{%
+  \NCSUStatementEnd
+}
+
+\DeclareDocumentEnvironment{remark}{O{}}{%
+  \NCSUStatementBegin{Remark}{#1}{NCSUBoxGrayTitle}{black!45}%
+}{%
+  \NCSUStatementEnd
+}

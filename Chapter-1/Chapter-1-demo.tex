@@ -1,0 +1,402 @@
+\chapter{THE FUNDAMENTAL THEOREM OF LINE INTEGRALS}
+\label{chap-one}
+
+\section{Purpose of This Sample Chapter}
+\label{sec:sample-purpose}
+
+This chapter is included to show that the template can support ordinary dissertation writing, mathematical exposition, displayed equations, theorem environments, proofs, diagrams, tables, citations, and figures with alt text. A student using this file should replace the mathematical content with their own work, but the structure is intended to model accessible source habits.
+
+In particular, this chapter demonstrates the following practices:
+\begin{enumerate}
+  \item Use real section and subsection headings instead of visual formatting alone.
+  \item Write equations in LaTeX source, not as images.
+  \item Give every meaningful figure alternative text in the source file.
+  \item Use tables with header rows, not aligned text made with spaces.
+  \item Use descriptive captions that explain why the figure or table appears in the chapter.
+\end{enumerate}
+
+\section{A First Definition}
+\label{sec:line-integral-definitions}
+
+Line integrals give a way to accumulate information along a curve. In vector calculus, one common version measures the component of a vector field in the direction of motion along a parametrized path.
+
+\begin{definition}[Line integral of a vector field]
+\label{def:line-integral}
+Let \(C\) be a smooth curve parametrized by \(\mathbf r(t)\), where \(a \leq t \leq b\). Let \(\mathbf F\) be a vector field defined on the curve. The line integral of \(\mathbf F\) over \(C\) is
+\[
+\int_C \mathbf F \cdot d\mathbf r
+= \int_a^b \mathbf F(\mathbf r(t)) \cdot \mathbf r'(t)\,dt.
+\]
+\end{definition}
+
+The notation \(d\mathbf r\) reminds us that the integral follows the direction of the curve. If the parametrization runs from a starting point \(P\) to an ending point \(Q\), then the sign and value of the integral can depend on that direction.
+
+\section{The Fundamental Theorem}
+\label{sec:ftli-statement}
+
+The fundamental theorem of line integrals is the vector-calculus analogue of the one-variable fundamental theorem of calculus. It says that if a vector field is the gradient of a scalar function, then the line integral depends only on the endpoint values of that scalar function.
+
+Below, we see two subsections.
+
+\subsection{Statement of the theorem}
+\label{sec:ftli-statement-subsection}
+
+\begin{theorem}[Fundamental theorem of line integrals]
+\label{thm:ftli}
+Let \(f\) be a differentiable scalar-valued function whose gradient is continuous on an open region containing a smooth curve \(C\). Suppose \(C\) is parametrized by \(\mathbf r(t)\), where \(a \leq t \leq b\). Then
+\[
+\int_C \nabla f \cdot d\mathbf r
+= f(\mathbf r(b)) - f(\mathbf r(a)).
+\]
+\end{theorem}
+
+This result is powerful because it replaces an integral over an entire curve with a calculation at two points. When \(\mathbf F = \nabla f\), the function \(f\) is called a potential function for \(\mathbf F\), and the vector field is called conservative.
+
+\subsection{Proof of the theorem}
+\label{sec:ftli-proof-subsection}
+
+\begin{proof}
+Since \(C\) is parametrized by \(\mathbf r(t)\), Definition~\ref{def:line-integral} gives
+\[
+\int_C \nabla f \cdot d\mathbf r
+= \int_a^b \nabla f(\mathbf r(t)) \cdot \mathbf r'(t)\,dt.
+\]
+By the multivariable chain rule,
+\[
+\frac{d}{dt} f(\mathbf r(t))
+= \nabla f(\mathbf r(t)) \cdot \mathbf r'(t).
+\]
+Therefore,
+\[
+\int_C \nabla f \cdot d\mathbf r
+= \int_a^b \frac{d}{dt} f(\mathbf r(t))\,dt
+= f(\mathbf r(b)) - f(\mathbf r(a)),
+\]
+by the one-variable fundamental theorem of calculus.
+\end{proof}
+
+\section{A Diagram of the Idea}
+\label{sec:ftli-diagram}
+
+Figure~\ref{fig:ftli-path} shows a curve that begins at \(P\) and ends at \(Q\). The theorem says that when \(\mathbf F = \nabla f\), the integral along the curve is determined by the value of \(f\) at those two endpoints, not by the particular route between them.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  scale=1.05,
+  >=Latex,
+  alt={A coordinate-plane diagram showing a curved path from point P near the lower left to point Q near the upper right. Several light gray level curves surround the path, and small arrows along the path show its orientation from P to Q.}
+]
+  \draw[->] (-0.3,0) -- (6.2,0) node[right] {\(x\)};
+  \draw[->] (0,-0.3) -- (0,4.5) node[left] {\(y\)};
+
+  \draw[very thick,blue!70!black]
+    (0.8,0.65) .. controls (1.6,1.8) and (2.6,0.8) .. (3.4,2.05)
+    .. controls (4.0,3.0) and (4.8,2.2) .. (5.3,3.55);
+
+  \fill (0.8,0.65) circle (2.5pt);
+  \fill (5.3,3.55) circle (2.5pt);
+  \node[below left] at (1.8,0.65) {\(P=\mathbf r(a)\)};
+  \node[above right] at (5.3,3.55) {\(Q=\mathbf r(b)\)};
+
+\end{tikzpicture}
+\caption[A path in the xy-plane illustrating the major conclusion of the FTLI.]{A path from \(P\) to \(Q.\) For a conservative vector field, the line integral depends only on value of the potential function at the endpoints.}
+\label{fig:ftli-path}
+\end{figure}
+
+\section{A Short Computation}
+\label{sec:ftli-example}
+
+The theorem can be checked in a concrete case. Let
+\[
+f(x,y)=x^2+y^2,
+\]
+so that
+\[
+\nabla f(x,y)=\langle 2x,2y\rangle.
+\]
+Let \(C\) be parametrized by \(\mathbf r(t)=\langle t,t^2\rangle\), where \(0\leq t\leq 1\). Then \(\mathbf r(0)=\langle 0,0\rangle\) and \(\mathbf r(1)=\langle 1,1\rangle\). By Theorem~\ref{thm:ftli},
+\[
+\int_C \nabla f \cdot d\mathbf r
+= f(1,1)-f(0,0)
+= 2.
+\]
+
+We can also compute directly from the parametrization:
+\[
+\begin{aligned}
+\int_C \nabla f \cdot d\mathbf r
+&= \int_0^1 \nabla f(\mathbf r(t)) \cdot \mathbf r'(t)\,dt \\
+&= \int_0^1 \langle 2t,2t^2\rangle \cdot \langle 1,2t\rangle\,dt \\
+&= \int_0^1 \left(2t+4t^3\right)\,dt \\
+&= \left[t^2+t^4\right]_0^1 \\
+&= 2.
+\end{aligned}
+\]
+This agrees with the endpoint calculation.
+
+\section{A Small Table Example}
+\label{sec:accessible-table-example}
+
+Tables should be used for data that are genuinely tabular. Table~\ref{tab:ftli-comparison} compares the two approaches used in the example above.
+
+\begin{table}[htbp]
+\centering
+\caption{Two ways to compute the same conservative line integral.}
+\label{tab:ftli-comparison}
+\begin{tabular}{p{0.28\textwidth}p{0.52\textwidth}p{0.12\textwidth}}
+\toprule
+\textbf{Method} & \textbf{Main calculation} & \textbf{Value} \\
+\midrule
+Endpoint method & Compute \(f(\mathbf r(1))-f(\mathbf r(0))\). & \(2\) \\
+Direct integral & Compute \(\int_0^1 \nabla f(\mathbf r(t))\cdot \mathbf r'(t)\,dt\). & \(2\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{An Example with Citations}
+\label{sec:citations-example}
+
+A dissertation chapter usually includes citations as part of the mathematical or scientific narrative. Parenthetical citations can be written with \verb|\citep|, as in \citep{kiladis2006three}. Narrative citations can be written with \verb|\citet|, as in \citet{tomassini2017interaction}. Students should replace these sample references with sources that are relevant to their own work.
+
+ 
+\section{A fancy diagram}
+\label{sec:chapter-one-fancy-diagram}
+
+Many dissertations in mathematics use diagrams to explain structure. In algebraic topology, algebraic geometry, and homological algebra, commutative diagrams are often used to organize maps between groups, modules, or vector spaces. This chapter gives a sample of how a mathematical dissertation might combine definitions, a theorem, a proof sketch, and an accessible TikZ figure.
+
+The example is the snake lemma. The name comes from the connecting homomorphism that winds through the diagram from a kernel term to a cokernel term.
+
+Commutative diagrams are commonly used to organize algebraic information in topology and homological algebra \citep{sample:diagrammatic-algebra}. The snake lemma is a standard example of a result whose proof is naturally represented by a diagram \citep{sample:snake-lemma}.
+
+\section{Exact Sequences}
+\label{sec:exact-sequences}
+
+A sequence of groups and homomorphisms
+
+\begin{equation}
+A \xrightarrow{f} B \xrightarrow{g} C
+\label{eq:short-sequence}
+\end{equation}
+
+is said to be exact at \(B\) if
+
+\begin{equation}
+\operatorname{im}(f)=\ker(g).
+\label{eq:exact-at-b}
+\end{equation}
+
+In words, exactness says that the elements of \(B\) that are sent to zero by \(g\) are exactly the elements that came from \(A\).
+
+A short exact sequence has the form
+
+\begin{equation}
+0 \longrightarrow A \xrightarrow{f} B \xrightarrow{g} C \longrightarrow 0.
+\label{eq:short-exact-sequence}
+\end{equation}
+
+This means that \(f\) is injective, \(g\) is surjective, and the image of \(f\) is the kernel of \(g\).
+
+\section{The Snake Lemma}
+\label{sec:snake-lemma}
+
+The snake lemma starts with a commutative diagram whose rows are exact:
+
+\begin{equation}
+0 \longrightarrow A' \longrightarrow B' \longrightarrow C'
+\end{equation}
+
+and
+
+\begin{equation}
+0 \longrightarrow A \longrightarrow B \longrightarrow C.
+\end{equation}
+
+There are also vertical maps from the top row to the bottom row. The conclusion of the snake lemma is that these maps produce a new exact sequence involving kernels and cokernels.
+
+\noindent\textbf{Theorem: Snake Lemma.}
+Suppose the rows in Figure~\ref{fig:snake-lemma-diagram} are exact and the diagram commutes. Then there is a connecting homomorphism
+
+\begin{equation}
+\delta:\ker(\gamma)\longrightarrow \operatorname{coker}(\alpha)
+\label{eq:connecting-homomorphism}
+\end{equation}
+
+such that the following sequence is exact:
+
+\begin{equation}
+\ker(\alpha)
+\longrightarrow
+\ker(\beta)
+\longrightarrow
+\ker(\gamma)
+\xrightarrow{\delta}
+\operatorname{coker}(\alpha)
+\longrightarrow
+\operatorname{coker}(\beta)
+\longrightarrow
+\operatorname{coker}(\gamma).
+\label{eq:snake-lemma-conclusion}
+\end{equation}
+
+\section{The Diagram}
+\label{sec:snake-diagram}
+
+Figure~\ref{fig:snake-lemma-diagram} shows the standard snake lemma diagram. The solid arrows show the original commutative diagram. The dashed curved arrow shows the connecting homomorphism, which is the part of the diagram that gives the lemma its name.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  x=1.45cm,
+  y=1.15cm,
+  >=Latex,
+  module/.style={draw, rounded corners=2pt, minimum width=1.05cm, minimum height=0.55cm, align=center},
+  zero/.style={minimum width=0.5cm, minimum height=0.4cm, align=center},
+  map/.style={->, thick},
+  exact/.style={->, thick},
+  snake/.style={
+    ->,
+    very thick,
+    dashed,
+    decorate,
+    decoration={snake, amplitude=1.4mm, segment length=6mm}
+  },
+  alt={A commutative diagram for the snake lemma. The top exact row is zero to A prime to B prime to C prime. The bottom row is zero to A to B to C. Vertical maps alpha, beta, and gamma go from the top row to the bottom row. Kernel terms appear above the top row and cokernel terms appear below the bottom row. A dashed winding arrow labeled delta connects ker gamma to coker alpha.}
+]
+  % Main row nodes
+  \node[zero]   (z1)  at (-3, 0) {\(0\)};
+  \node[module] (Ap)  at (-2, 0) {\(A'\)};
+  \node[module] (Bp)  at ( 0, 0) {\(B'\)};
+  \node[module] (Cp)  at ( 2, 0) {\(C'\)};
+
+  \node[zero]   (z2)  at (-3,-2) {\(0\)};
+  \node[module] (A)   at (-2,-2) {\(A\)};
+  \node[module] (B)   at ( 0,-2) {\(B\)};
+  \node[module] (C)   at ( 2,-2) {\(C\)};
+
+  % Kernel nodes
+  \node[module] (Ka) at (-2, 1.65) {\(\ker(\alpha)\)};
+  \node[module] (Kb) at ( 0, 1.65) {\(\ker(\beta)\)};
+  \node[module] (Kc) at ( 2, 1.65) {\(\ker(\gamma)\)};
+
+  % Cokernel nodes
+  \node[module] (Ca) at (-2,-3.65) {\(\operatorname{coker}(\alpha)\)};
+  \node[module] (Cb) at ( 0,-3.65) {\(\operatorname{coker}(\beta)\)};
+  \node[module] (Cc) at ( 2,-3.65) {\(\operatorname{coker}(\gamma)\)};
+
+  % Row arrows
+  \draw[exact] (z1) -- (Ap);
+  \draw[exact] (Ap) -- node[above] {\(f'\)} (Bp);
+  \draw[exact] (Bp) -- node[above] {\(g'\)} (Cp);
+
+  \draw[exact] (z2) -- (A);
+  \draw[exact] (A) -- node[above] {\(f\)} (B);
+  \draw[exact] (B) -- node[above] {\(g\)} (C);
+
+  % Vertical maps
+  \draw[map] (Ap) -- node[right] {\(\alpha\)} (A);
+  \draw[map] (Bp) -- node[right] {\(\beta\)} (B);
+  \draw[map] (Cp) -- node[right] {\(\gamma\)} (C);
+
+  % Kernel maps down to top row
+  \draw[map] (Ka) -- (Ap);
+  \draw[map] (Kb) -- (Bp);
+  \draw[map] (Kc) -- (Cp);
+
+  % Kernel sequence
+  \draw[map] (Ka) -- (Kb);
+  \draw[map] (Kb) -- (Kc);
+
+  % Cokernel maps from bottom row down
+  \draw[map] (A) -- (Ca);
+  \draw[map] (B) -- (Cb);
+  \draw[map] (C) -- (Cc);
+
+  % Cokernel sequence
+  \draw[map] (Ca) -- (Cb);
+  \draw[map] (Cb) -- (Cc);
+
+  % Snake connecting homomorphism
+  \draw[snake]
+    (Kc.south)
+    .. controls (2.7,0.8) and (1.4,-1.1) ..
+    (0.35,-2.75)
+    .. controls (-0.45,-3.65) and (-1.2,-3.65) ..
+    (Ca.east)
+    node[pos=0.38, right] {\(\delta\)};
+
+  % Labels for rows
+  \node[align=center] at (3.45,0) {exact\\top row};
+  \node[align=center] at (3.45,-2) {exact\\bottom row};
+
+  % Light guide labels
+  \node[align=center] at (-3.2,1.65) {kernels};
+  \node[align=center] at (-3.35,-3.65) {cokernels};
+\end{tikzpicture}
+\caption[A schematic snake lemma diagram]{A schematic snake lemma diagram. The solid arrows show the original commutative diagram with exact rows. The dashed winding arrow represents the connecting homomorphism from \(\ker(\gamma)\) to \(\operatorname{coker}(\alpha)\).}
+\label{fig:snake-lemma-diagram}
+\end{figure}
+
+\section{Constructing the Connecting Homomorphism}
+\label{sec:connecting-homomorphism}
+
+The connecting homomorphism is the key part of the theorem. The construction follows one element through the diagram.
+
+Let \(c'\in \ker(\gamma)\). Since \(c'\in C'\) and the top row is exact, we choose an element \(b'\in B'\) such that
+
+\begin{equation}
+g'(b')=c'.
+\label{eq:choose-b-prime}
+\end{equation}
+
+Now apply the vertical map \(\beta\). Since the diagram commutes,
+
+\begin{equation}
+g(\beta(b'))=\gamma(g'(b'))=\gamma(c')=0.
+\label{eq:commuting-step}
+\end{equation}
+
+Thus \(\beta(b')\in \ker(g)\). Since the bottom row is exact, there is an element \(a\in A\) such that
+
+\begin{equation}
+f(a)=\beta(b').
+\label{eq:choose-a}
+\end{equation}
+
+The image of \(a\) in \(\operatorname{coker}(\alpha)\) is defined to be \(\delta(c')\). In other words,
+
+\begin{equation}
+\delta(c')=[a]\in \operatorname{coker}(\alpha).
+\label{eq:delta-definition}
+\end{equation}
+
+The proof then checks that this definition does not depend on the choices made, that \(\delta\) is a homomorphism, and that the resulting sequence is exact.
+
+\section{Why the Diagram Matters}
+\label{sec:why-diagram-matters}
+
+The snake lemma is useful because it turns a large commutative diagram into an exact sequence. In algebraic topology, this kind of result helps compare homology groups that arise from related spaces, pairs of spaces, or chain complexes.
+
+The diagram is not just decorative. It records the logic of the proof:
+
+\begin{enumerate}
+  \item Start with an element in \(\ker(\gamma)\).
+  \item Lift the element across the top row.
+  \item Move down through the vertical map.
+  \item Use exactness of the bottom row.
+  \item Record the resulting class in \(\operatorname{coker}(\alpha)\).
+\end{enumerate}
+
+The winding arrow in the figure summarizes this path through the diagram.
+
+\section{Accessibility Notes for Mathematical Diagrams}
+\label{sec:math-diagram-accessibility}
+
+Commutative diagrams can be difficult to interpret with assistive technology. A thesis should not rely on the image alone. The surrounding text should describe the structure of the diagram and explain how the diagram is used in the proof.
+
+For this kind of figure, the alt text should identify the major objects, the direction of the maps, and the role of the special arrow. The caption should explain what the figure represents in the argument. The body text should then walk through the important path in the diagram.
+
+\section{Summary}
+\label{sec:chapter-one-summary}
+
+This chapter illustrates how a mathematical dissertation chapter might combine exposition, definitions, theorems, proofs, diagrams, computations, tables, citations, and accessible figures. The mathematical content is an AI-generated sample. The important template lesson is that accessibility starts in the source: headings, equations, captions, alt text, tables, and links should be written carefully before the final PDF is created.

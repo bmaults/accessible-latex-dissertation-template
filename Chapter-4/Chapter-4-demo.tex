@@ -1,0 +1,143 @@
+\chapter{Marine, Earth, and Atmospheric Science}
+\label{chap-four}
+
+Marine, earth, and atmospheric science often connects observations from the ocean, atmosphere, and land surface. A dissertation in this area may include maps, satellite images, time series, model output, field measurements, and physical equations. This sample chapter shows how that kind of material can be presented in an accessible way.
+
+The example focuses on tropical weather systems. The goal is not to give a complete scientific treatment, but to demonstrate how a student might combine text, figures, tables, and equations in a thesis or dissertation.
+
+\section{Scientific Context}
+\label{sec:meas-context}
+
+Tropical cyclones are influenced by several environmental conditions, including sea surface temperature, atmospheric moisture, vertical wind shear, and large-scale circulation patterns. These variables interact across different spatial scales. For example, warm ocean water can provide energy for convection, while strong vertical wind shear can disrupt storm organization.
+
+Figure~\ref{fig:damage} shows an example of a weather-related image from the original template. In a real dissertation, the caption should explain the role of the figure in the argument, and the alt text should describe the visual information needed by a reader who cannot see the image.
+
+\accessiblefigure[htbp][\textwidth]
+  {Chapter-1/figs/Damage.png}
+  {A map-based hurricane track graphic with labels for Newfoundland, Bermuda, and an African easterly wave, along with inset photographs showing storm damage, flooding, wind, and a damaged boat.}
+  {Sample weather-related image included with the original template. In a real dissertation, replace this image, alt text, and caption with content from the dissertation.}
+  {fig:damage}
+
+\section{Environmental Variables}
+\label{sec:meas-variables}
+
+A typical analysis may compare several environmental variables before, during, and after a storm event. Table~\ref{tab:meas-variables} gives a simple example. The table uses real text and column headers rather than a screenshot.
+
+\begin{table}[htbp]
+\caption{Examples of environmental variables used in tropical weather analysis.}
+\label{tab:meas-variables}
+\centering
+\begin{tabular}{lll}
+\toprule
+Variable & Common interpretation & Example unit \\
+\midrule
+Sea surface temperature & Ocean energy available to the atmosphere & \(^{\circ}\mathrm{C}\) \\
+Vertical wind shear & Change in wind with height & \(\mathrm{m/s}\) \\
+Relative humidity & Atmospheric moisture content & percent \\
+Surface pressure & Strength of low-pressure circulation & \(\mathrm{hPa}\) \\
+Precipitation rate & Rainfall intensity & \(\mathrm{mm/hr}\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Tables like this are useful for readers because they define variables before the variables appear in formulas or figures.
+
+\section{A Basic Physical Relationship}
+\label{sec:meas-equation}
+
+One common approximation in atmospheric science is hydrostatic balance. It relates the vertical pressure gradient to the density of air and the acceleration due to gravity:
+
+\begin{equation}
+\frac{\partial p}{\partial z} = -\rho g.
+\label{eq:hydrostatic-balance}
+\end{equation}
+
+In Equation~\ref{eq:hydrostatic-balance}, \(p\) is pressure, \(z\) is height, \(\rho\) is air density, and \(g\) is the acceleration due to gravity. The negative sign indicates that pressure decreases as height increases.
+
+This equation is not a complete model of the atmosphere. Instead, it is a useful approximation when vertical accelerations are small compared with the force of gravity.
+
+\section{A Schematic Cross Section}
+\label{sec:meas-cross-section}
+
+Figure~\ref{fig:storm-cross-section} gives a simple schematic of a tropical system over warm ocean water. The figure is drawn with TikZ so that the source remains editable. The alt text describes the main visual features of the diagram.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  x=1cm,
+  y=1cm,
+  alt={A schematic cross section of a tropical weather system over the ocean. Warm ocean water is shown at the bottom. Curved arrows rise from the ocean surface into a central convective cloud, and upper-level arrows spread outward near the top of the cloud.}
+]
+  % ocean
+  \fill[blue!20] (-5,-1.2) rectangle (5,-0.5);
+  \draw[blue!60!black, thick] (-5,-0.5) -- (5,-0.5);
+  \node[blue!60!black] at (3.6,-0.85) {warm ocean surface};
+
+  % cloud
+  \fill[gray!20] (-1.4,-0.2) .. controls (-2.2,1.1) and (-1.2,2.8) .. (-0.4,3.0)
+    .. controls (0.0,3.7) and (1.1,3.4) .. (1.0,2.7)
+    .. controls (2.0,2.4) and (2.2,1.2) .. (1.3,0.7)
+    .. controls (1.4,0.0) and (0.2,-0.2) .. (-1.4,-0.2);
+  \draw[gray!70!black, thick] (-1.4,-0.2) .. controls (-2.2,1.1) and (-1.2,2.8) .. (-0.4,3.0)
+    .. controls (0.0,3.7) and (1.1,3.4) .. (1.0,2.7)
+    .. controls (2.0,2.4) and (2.2,1.2) .. (1.3,0.7)
+    .. controls (1.4,0.0) and (0.2,-0.2) .. (-1.4,-0.2);
+  \node at (0,1.4) {deep convection};
+
+  % rising motion
+  \draw[->, thick] (-2.8,-0.45) .. controls (-1.8,0.2) and (-1.2,0.8) .. (-0.8,1.6);
+  \draw[->, thick] (2.8,-0.45) .. controls (1.8,0.2) and (1.2,0.8) .. (0.8,1.6);
+  \draw[->, thick] (0,-0.45) -- (0,2.5);
+
+  % outflow
+  \draw[->, thick] (-0.2,3.1) .. controls (-1.2,3.6) and (-2.4,3.7) .. (-3.5,3.4);
+  \draw[->, thick] (0.2,3.1) .. controls (1.2,3.6) and (2.4,3.7) .. (3.5,3.4);
+  \node at (0,3.95) {upper-level outflow};
+
+  % labels
+  \node[align=center] at (-3.7,1.2) {moist air\\converges};
+  \node[align=center] at (3.7,1.2) {moist air\\converges};
+\end{tikzpicture}
+\caption{A schematic cross section of a tropical weather system. Warm ocean water supports rising moist air, deep convection, and upper-level outflow.}
+\label{fig:storm-cross-section}
+\end{figure}
+
+\section{Example Analysis}
+\label{sec:meas-analysis}
+
+Suppose a researcher wants to compare the environment before and during a storm event. One simple approach is to compute changes in variables over time. For example, if \(T_0\) is the sea surface temperature before the event and \(T_1\) is the sea surface temperature during the event, then the temperature change is
+
+\begin{equation}
+\Delta T = T_1 - T_0.
+\label{eq:temperature-change}
+\end{equation}
+
+A negative value of \(\Delta T\) indicates cooling, while a positive value indicates warming. In a real analysis, this calculation might be repeated across many grid points, buoys, or satellite retrievals.
+
+For a spatially averaged value over a region \(R\), one might write
+
+\begin{equation}
+\overline{T}
+=
+\frac{1}{A(R)}
+\int_R T(x,y)\,dA,
+\label{eq:spatial-average}
+\end{equation}
+
+where \(A(R)\) is the area of the region and \(T(x,y)\) is the temperature at location \((x,y)\). The surrounding text should explain the region, the data source, and the units.
+
+\section{Accessibility Notes for Earth Science Figures}
+\label{sec:meas-accessibility}
+
+Earth science dissertations often rely on highly visual material. Maps, radar images, satellite images, and model-output plots can be difficult to interpret without careful explanation. Authors should follow these practices.
+
+\begin{enumerate}
+  \item Describe the main visual message of each map or plot in nearby text.
+  \item Include alt text for every meaningful figure.
+  \item Avoid relying on color alone to distinguish categories or intensities.
+  \item Use readable labels, legends, and units.
+  \item Do not use screenshots of tables or equations.
+  \item Explain abbreviations such as SST, RH, MSLP, or AEW the first time they appear.
+\end{enumerate}
+
+These practices help readers understand the scientific argument even when they cannot rely on the visual display alone.

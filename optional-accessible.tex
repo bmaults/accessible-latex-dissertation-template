@@ -1,0 +1,210 @@
+%%----------------------------------------------------------------------------%%
+%% Optional accessible design choices
+%%----------------------------------------------------------------------------%%
+%% This file contains optional visual choices only.
+%%
+%% Required accessibility settings, PDF metadata, hyperlink setup, MathML
+%% support, ETD formatting, and student-specific macros belong elsewhere.
+%%
+%% This file is loaded early in dissertation-main-accessible.tex so that font
+%% choices happen immediately after unicode-math. Visual choices are defined
+%% here but applied later through \NCSUApplyOptionalVisualChoices.
+%%----------------------------------------------------------------------------%%
+
+
+%% -------------------------------------------------------------------------- %%
+%% Optional: thesis font choices
+%% -------------------------------------------------------------------------- %%
+%% This template is designed for LuaLaTeX, so font changes should use fontspec
+%% and unicode-math rather than older LaTeX font packages.
+%%
+%% Activate at most one font option near the bottom of this section.
+%%
+%% Leave all font options commented out to use the template's default font setup.
+
+%% -------------------------------------------------------------------------- %%
+%% Option 1: Libertinus
+%% A polished, readable serif font with a matching math font.
+%% -------------------------------------------------------------------------- %%
+
+\newcommand{\NCSUUseLibertinusFonts}{%
+  \setmainfont{Libertinus Serif}[
+    Ligatures=TeX
+  ]%
+  \setsansfont{Libertinus Sans}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+  ]%
+  \setmonofont{Libertinus Mono}[
+    Scale=MatchLowercase
+  ]%
+  \setmathfont{Libertinus Math}%
+}
+
+%% -------------------------------------------------------------------------- %%
+%% Option 2: STIX Two
+%% A formal, journal-like font family with strong math support.
+%% -------------------------------------------------------------------------- %%
+
+\newcommand{\NCSUUseSTIXTwoFonts}{%
+  \setmainfont{STIX Two Text}[
+    Ligatures=TeX
+  ]%
+  \setsansfont{TeX Gyre Heros}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+  ]%
+  \setmonofont{Latin Modern Mono}[
+    Scale=MatchLowercase
+  ]%
+  \setmathfont{STIX Two Math}%
+}
+
+%% -------------------------------------------------------------------------- %%
+%% Option 3: Latin Modern
+%% This is close to the default LaTeX look and is the safest fallback.
+%% -------------------------------------------------------------------------- %%
+
+\newcommand{\NCSUUseLatinModernFonts}{%
+  \setmainfont{Latin Modern Roman}[
+    Ligatures=TeX
+  ]%
+  \setsansfont{Latin Modern Sans}[
+    Ligatures=TeX,
+    Scale=MatchLowercase
+  ]%
+  \setmonofont{Latin Modern Mono}[
+    Scale=MatchLowercase
+  ]%
+  \setmathfont{Latin Modern Math}%
+}
+
+%% Activate at most one font option.
+%% For the default template font, comment out all three lines.
+
+\NCSUUseLibertinusFonts
+% \NCSUUseSTIXTwoFonts
+% \NCSUUseLatinModernFonts
+
+
+%% -------------------------------------------------------------------------- %%
+%% Optional: cleaner NC State chapter headings
+%% -------------------------------------------------------------------------- %%
+%% This changes the visual appearance of chapter headings without changing the
+%% actual \chapter command. It avoids decorative chapter-heading packages.
+%%
+%% Chapter headers are one of the few places where NC State allows text size to
+%% differ from the body text.
+%%
+%% Turn this on or off with the toggle below.
+
+\newif\ifNCSUUseOptionalChapterHeadings
+
+\NCSUUseOptionalChapterHeadingstrue
+% \NCSUUseOptionalChapterHeadingsfalse
+
+\makeatletter
+
+\newcommand{\NCSUUseAccessibleChapterHeadings}{%
+  \renewcommand{\@makechapterhead}[1]{%
+    \vspace*{1.0in}%
+    {\parindent \z@ \raggedright \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+        {\normalsize\bfseries\color{NCSUReynoldsRed}%
+        \MakeUppercase{\@chapapp}\space \thechapter\par}%
+        \vspace{0.25in}%
+      \fi
+      {\Large\bfseries ##1\par}%
+      \vspace{0.18in}%
+      {\color{NCSUReynoldsRed}\rule{0.45\textwidth}{0.8pt}\par}%
+      \vspace{0.75in}%
+    }%
+  }%
+
+  \renewcommand{\@makeschapterhead}[1]{%
+    \vspace*{1.0in}%
+    {\parindent \z@ \raggedright \normalfont
+      {\Large\bfseries ##1\par}%
+      \vspace{0.18in}%
+      {\color{NCSUReynoldsRed}\rule{0.45\textwidth}{0.8pt}\par}%
+      \vspace{0.75in}%
+    }%
+  }%
+}
+
+\makeatother
+
+
+%% -------------------------------------------------------------------------- %%
+%% Optional: pretty theorem cards
+%% -------------------------------------------------------------------------- %%
+%% The required file defines theorem-like environments in a plain,
+%% final-ETD-safe way.
+%%
+%% This optional block changes the appearance of those environments to a softer
+%% math-textbook style. It does not use amsthm or tcolorbox.
+%%
+%% Turn this on or off with the toggle below.
+
+\newif\ifNCSUPrettyTheorems
+
+% \NCSUPrettyTheoremstrue
+\NCSUPrettyTheoremsfalse
+
+
+%% -------------------------------------------------------------------------- %%
+%% Apply optional visual choices
+%% -------------------------------------------------------------------------- %%
+%% This command is called from dissertation-main-accessible.tex after
+%% ncsu-required.tex has been loaded.
+%%
+%% Do not call this command inside optional-accessible.tex. It must run after
+%% ncsu-required.tex because the chapter heading style uses NC State colors and
+%% the theorem-card style uses the theorem macros defined there.
+
+\makeatletter
+
+\newcommand{\NCSUApplyOptionalVisualChoices}{%
+  \ifNCSUUseOptionalChapterHeadings
+    \NCSUUseAccessibleChapterHeadings
+  \fi
+
+  \ifNCSUPrettyTheorems
+    \@ifundefined{NCSUStatementBegin}{%
+      \PackageWarningNoLine{ncsu-template}{%
+        Pretty theorem cards were requested, but the base theorem macros were not found.
+        Make sure ncsu-required.tex is loaded before optional visual choices are applied.
+      }%
+    }{%
+      \renewcommand{\NCSUStatementBegin}[4]{%
+        \refstepcounter{ncsuStatement}%
+        \def\NCSUCurrentStatementRuleColor{##4}%
+        \par\addvspace{12pt}%
+        \noindent
+        \begingroup
+          \setlength{\fboxsep}{6pt}%
+          \colorbox{##3}{%
+            \makebox[\dimexpr\linewidth-2\fboxsep\relax][l]{%
+              \strut\NCSUStatementTitle{##1}{\thencsuStatement}{##2}%
+            }%
+          }%
+        \endgroup
+        \par\nobreak\vspace{6pt}%
+        \begingroup
+          \leftskip=1em
+          \rightskip=1em
+          \noindent\ignorespaces
+      }%
+
+      \renewcommand{\NCSUStatementEnd}{%
+        \par
+        \endgroup
+        \vspace{4pt}%
+        \noindent{\color{\NCSUCurrentStatementRuleColor}\rule{\linewidth}{0.7pt}}%
+        \par\addvspace{12pt}%
+      }%
+    }%
+  \fi
+}
+
+\makeatother

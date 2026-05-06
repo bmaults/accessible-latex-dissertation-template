@@ -1,0 +1,172 @@
+\chapter{The Central Limit Theorem}
+\label{chap-three}
+
+The central limit theorem is one of the main reasons that the normal distribution appears throughout statistics. Roughly speaking, it says that averages of many independent observations tend to look normal, even when the original data do not come from a normal distribution.
+
+This AI-generated chapter gives a short example of how a statistics dissertation might present definitions, a theorem, a proof sketch, a table, and a figure. The goal is model accessible writing in a statistical context.
+
+\section{Sample Means}
+\label{sec:sample-means}
+
+Suppose that \(X_1, X_2, \ldots, X_n\) are independent observations from the same population. The sample mean is
+
+\begin{equation}
+\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i.
+\label{eq:sample-mean}
+\end{equation}
+
+The sample mean is often used to estimate the population mean. If the population mean is \(\mu\), then \(\bar{X}_n\) tends to get closer to \(\mu\) as the sample size increases. This is the content of the law of large numbers.
+
+The central limit theorem gives more information. It describes the shape of the distribution of the sample mean after it has been centered and scaled.
+
+\section{Statement of the Theorem}
+\label{sec:clt-statement}
+
+\noindent\textbf{Theorem: Central Limit Theorem.}
+Suppose that \(X_1, X_2, \ldots, X_n\) are independent and identically distributed random variables with mean \(\mu\) and finite, positive variance \(\sigma^2\). Then
+
+\begin{equation}
+\frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}}
+\xrightarrow{d} Z,
+\label{eq:clt}
+\end{equation}
+
+where \(Z\) has the standard normal distribution.
+
+In words, the standardized sample mean becomes approximately standard normal as \(n\) becomes large. The notation \(\xrightarrow{d}\) means convergence in distribution.
+
+\section{Interpretation}
+\label{sec:clt-interpretation}
+
+The expression in Equation~\ref{eq:clt} has three important pieces.
+
+\begin{enumerate}
+  \item The numerator \(\bar{X}_n-\mu\) centers the sample mean at zero.
+  \item The denominator \(\sigma/\sqrt{n}\) rescales the sample mean by its standard deviation.
+  \item The conclusion says that this centered and scaled quantity has an approximately normal distribution for large \(n\).
+\end{enumerate}
+
+This result is useful because it allows researchers to use normal approximations in many settings where the original data are not normally distributed.
+
+For example, suppose that the original observations are right-skewed. Individual observations may not look symmetric, but the averages of many such observations may be much closer to normal.
+
+\section{A Proof Sketch}
+\label{sec:clt-proof-sketch}
+
+A full proof of the central limit theorem requires more probability theory than we want to include in this sample chapter. However, the main idea can be explained using moment generating functions.
+
+Let
+
+\begin{equation}
+Y_i = \frac{X_i-\mu}{\sigma}.
+\label{eq:standardized-observation}
+\end{equation}
+
+Then each \(Y_i\) has mean \(0\) and variance \(1\). The standardized sample mean can be written as
+
+\begin{align}
+\frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}}
+&= \frac{\sqrt{n}}{\sigma}\left(\bar{X}_n-\mu\right) \\
+&= \frac{\sqrt{n}}{\sigma}
+   \left(
+     \frac{1}{n}\sum_{i=1}^{n}X_i-\mu
+   \right) \\
+&= \frac{1}{\sqrt{n}}\sum_{i=1}^{n}
+   \frac{X_i-\mu}{\sigma} \\
+&= \frac{1}{\sqrt{n}}\sum_{i=1}^{n}Y_i.
+\label{eq:standardized-mean}
+\end{align}
+
+The proof then studies the distribution of the sum in Equation~\ref{eq:standardized-mean}. Under the hypotheses of the theorem, the moment generating function of this standardized sum approaches the moment generating function of a standard normal random variable. Since moment generating functions determine distributions under appropriate conditions, the standardized sample mean converges in distribution to a standard normal random variable.
+
+\section{A Simulation Example}
+\label{sec:clt-simulation}
+
+Table~\ref{tab:clt-simulation} shows a schematic example of what one might observe in a simulation. The original data are assumed to come from a skewed population. As the sample size increases, the distribution of the sample mean becomes more symmetric and more concentrated around the population mean.
+
+\begin{table}[htbp]
+\caption{A schematic summary of how sample means behave as the sample size increases.}
+\label{tab:clt-simulation}
+\centering
+\begin{tabular}{lll}
+\toprule
+Sample size & Shape of sample mean distribution & Variability \\
+\midrule
+\(n=5\)   & Still noticeably skewed      & Relatively large \\
+\(n=30\)  & More symmetric               & Smaller \\
+\(n=100\) & Close to normal in many cases & Much smaller \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The table is not meant to replace a formal theorem. Instead, it gives a practical interpretation of the theorem: larger samples tend to produce sample means whose distributions are more normal and less spread out.
+
+\section{A Diagram of the Normal Approximation}
+\label{sec:normal-approximation-diagram}
+
+Figure~\ref{fig:normal-approximation} shows the standard normal curve that appears in the conclusion of the central limit theorem. In an accessible document, the caption identifies the figure, and the surrounding text explains why it matters.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  x=1.25cm,
+  y=4cm,
+  alt={A bell-shaped standard normal curve centered at zero. The horizontal axis is labeled z, with tick marks at negative two, negative one, zero, one, and two.}
+]
+  \draw[->] (-3.4,0) -- (3.4,0) node[right] {\(z\)};
+  \draw[->] (0,0) -- (0,0.48) node[above] {density};
+
+  \draw[thick, domain=-3.2:3.2, samples=100]
+    plot (\x,{0.3989*exp(-0.5*\x*\x)});
+
+  \foreach \x in {-2,-1,0,1,2}
+    \draw (\x,0.01) -- (\x,-0.01) node[below] {\(\x\)};
+
+  \node[above] at (0,0.3989) {standard normal curve};
+\end{tikzpicture}
+\caption{The standard normal curve used in the central limit theorem. After centering and scaling, the sample mean is approximately distributed according to this curve when the sample size is large.}
+\label{fig:normal-approximation}
+\end{figure}
+
+\section{Why This Matters}
+\label{sec:clt-why-it-matters}
+
+The central limit theorem supports many common statistical procedures. For example, confidence intervals and hypothesis tests for means often rely on the fact that standardized sample means are approximately normal.
+
+A typical confidence interval for a population mean has the form
+
+\begin{equation}
+\bar{X}_n \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}},
+\label{eq:confidence-interval}
+\end{equation}
+
+when \(\sigma\) is known and the sample size is large. Here, \(z_{\alpha/2}\) is chosen from the standard normal distribution.
+
+In practice, \(\sigma\) is often unknown and must be estimated from the data. That leads to related procedures involving the sample standard deviation and the \(t\)-distribution. The central idea is the same: the sample mean is random, but its distribution can often be approximated well enough to make statistical inference possible.
+
+\section{Examples of Image Inclusion}
+\label{sec:image-inclusion-examples}
+
+The following figure is intentionally left from the original sample file. It is included here to demonstrate the accessibility helper commands for ordinary image files and cropped image files. 
+
+\accessiblefigurecropped[htbp][\textwidth]
+  {4cm 8.5cm 3cm 0cm}
+  {Chapter-1/figs/gfgnge_vs_year.eps}
+  {A cropped chart from the original template. The student should describe the chart type, axes, trend, and main message when replacing this placeholder.}
+  {Sample cropped image included with the original template. Replace this image, alt text, and caption with content from the dissertation.}
+  {fig:gfgn}
+
+\section{Accessibility Notes for Statistical Writing}
+\label{sec:clt-accessibility-notes}
+
+Statistical writing may include formulas, tables, plots, and notation-heavy explanations. To make this material more accessible, authors should follow these practices.
+
+\begin{enumerate}
+  \item Explain the meaning of each major equation in nearby text.
+  \item Use real LaTeX equations rather than screenshots of equations.
+  \item Use real tables with column headers rather than images of tables.
+  \item Describe the purpose and main message of each plot in the surrounding text.
+  \item Avoid relying on color alone to communicate statistical conclusions.
+\end{enumerate}
+
+These practices help readers who use screen readers, readers who enlarge text, and readers who are new to the notation.

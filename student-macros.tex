@@ -1,0 +1,85 @@
+%%----------------------------------------------------------------------------%%
+%% Student-specific compatibility macros
+%%
+%% This file is only for packages and macros needed by this student's chapters.
+%%
+%% Do not load hyperref, caption, titlesec, trackchanges, tcolorbox, or
+%% \begin{document} here. Those belong in the main template files.
+%%
+%% Theorem-like environments are defined in ncsu-required.tex. Optional visual
+%% changes to those environments belong in optional-accessible.tex.
+%%----------------------------------------------------------------------------%%
+
+%%----------------------------------------------------------------------------%%
+%% Packages needed by the student's content
+%%----------------------------------------------------------------------------%%
+
+\usepackage{accents}
+\usepackage{comment}
+\usepackage{easytable}
+\usepackage{multirow}
+\usepackage{multicol}
+
+%% This package lets us catch a few literal Unicode characters that may appear
+%% in the student's source. It is especially useful for avoiding PDF/A .notdef
+%% glyph failures from unsupported symbols.
+\usepackage{newunicodechar}
+
+%%----------------------------------------------------------------------------%%
+%% TikZ libraries
+%%
+%% If you do not use TikZ, delete this block.
+%% Keep these centralized here so individual figure files do not have to load
+%% TikZ libraries themselves.
+%%----------------------------------------------------------------------------%%
+
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows,
+  arrows.meta,
+  backgrounds,
+  calc,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  fit,
+  math,
+  positioning,
+  quotes,
+  through
+}
+
+%% If the original TikZ code used uppercase color names as TikZ keys, these
+%% definitions prevent errors such as: I do not know the key '/tikz/Red'.
+%%
+%% These are RGB-based color aliases, not CMYK definitions.
+
+\definecolor{AccessibleYellow}{HTML}{FFF4B8}
+\definecolor{AccessibleCyan}{HTML}{D8F3F5}
+\definecolor{AccessibleRed}{HTML}{F7D6D0}
+\definecolor{AccessibleGreen}{HTML}{DCEFD8}
+\definecolor{AccessibleGray}{HTML}{F2F2F2}
+\definecolor{AccessibleLightGreen}{HTML}{EAF6EA}
+\definecolor{AccessibleLightBlue}{HTML}{EAF3FA}
+\definecolor{AccessibleMediumBlue}{HTML}{BFDDF2}
+\definecolor{AccessibleBlue}{HTML}{D9EAF7}
+\definecolor{AccessibleLightCyan}{HTML}{D8F3F5}
+
+%%----------------------------------------------------------------------------%%
+%% Basic student macros
+%%----------------------------------------------------------------------------%%
+
+\providecommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}}
+\providecommand{\bo}{\ensuremath{\mathbf{\Omega}}}
+
+\providecommand{\eref}[1]{Eq.~\ref{#1}}
+\providecommand{\fref}[1]{Fig.~\ref{#1}}
+\providecommand{\tref}[1]{Table~\ref{#1}}
+\providecommand{\cref}[1]{Chap.~\ref{#1}}
+
+\providecommand{\todo}[1]{{\color{red}\textbf{TODO: #1}}}
+
+\providecommand{\R}{\mathbb{R}}
+
+%%----------------------------------------------------------------------------%%
+%% Other student-specific additions
+%%----------------------------------------------------------------------------%%

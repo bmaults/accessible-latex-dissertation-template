@@ -1,0 +1,258 @@
+\chapter{Computational Methods in Engineering}
+\label{chap:computational-methods}
+
+Many dissertations in computer science, engineering, applied mathematics, and the physical sciences include algorithms, source code, numerical experiments, or computational workflows. This sample chapter shows one way to present code in a thesis while keeping the material readable and accessible.
+
+The main example is a finite difference method for the one-dimensional heat equation. The goal is not to provide a complete numerical analysis, but to demonstrate how a student might present a model problem, an algorithm, a short Python script, a short MATLAB script, and a table of computational results.
+
+\section{A Model Problem}
+\label{sec:computational-model-problem}
+
+Consider the one-dimensional heat equation
+
+\begin{equation}
+\frac{\partial u}{\partial t}
+=
+\alpha
+\frac{\partial^2 u}{\partial x^2},
+\label{eq:heat-equation}
+\end{equation}
+
+where \(u(x,t)\) is the temperature at position \(x\) and time \(t\), and \(\alpha\) is the thermal diffusivity.
+
+For this demonstration, suppose the spatial domain is \(0\leq x\leq 1\), and suppose the boundary temperatures are fixed:
+
+\begin{equation}
+u(0,t)=0
+\qquad\text{and}\qquad
+u(1,t)=0.
+\label{eq:heat-boundary-conditions}
+\end{equation}
+
+We also choose the initial temperature distribution
+
+\begin{equation}
+u(x,0)=\sin(\pi x).
+\label{eq:heat-initial-condition}
+\end{equation}
+
+This problem is simple enough to explain in a template, but it still looks like the kind of model problem that appears in engineering and scientific computing.
+
+\section{Finite Difference Approximation}
+\label{sec:finite-difference-approximation}
+
+A finite difference method replaces derivatives with difference quotients. If \(x_j=j\Delta x\) and \(t_n=n\Delta t\), then we write \(u_j^n\) for an approximation to \(u(x_j,t_n)\).
+
+A common explicit approximation is
+
+\begin{equation}
+u_j^{n+1}
+=
+u_j^n
++
+r\left(u_{j-1}^n-2u_j^n+u_{j+1}^n\right),
+\label{eq:explicit-heat-method}
+\end{equation}
+
+where
+
+\begin{equation}
+r=\frac{\alpha\Delta t}{(\Delta x)^2}.
+\label{eq:stability-ratio}
+\end{equation}
+
+The value \(r\) is often called the stability ratio. For the explicit method, the time step must be chosen carefully. If \(r\) is too large, the numerical solution may become unstable.
+
+\section{Algorithm}
+\label{sec:computational-algorithm}
+
+The method can be summarized as follows.
+
+\begin{enumerate}
+  \item Choose the number of spatial grid points and the final time.
+  \item Compute \(\Delta x\), \(\Delta t\), and \(r\).
+  \item Set the initial condition at each grid point.
+  \item Apply the boundary conditions.
+  \item Step forward in time using Equation~\ref{eq:explicit-heat-method}.
+  \item Store or plot the approximate solution.
+\end{enumerate}
+
+When writing for accessibility, it is helpful to describe the algorithm in prose before showing code. The prose gives readers the purpose of the code and the main computational steps.
+
+\section{Python Example}
+\label{sec:python-example}
+
+\noindent\textbf{Code Example 1.}
+The following short Python script applies the explicit finite difference method to the one-dimensional heat equation. The code is included as real text rather than as a screenshot.
+
+\begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+alpha = 1.0
+x_min = 0.0
+x_max = 1.0
+final_time = 0.05
+
+num_x = 51
+dx = (x_max - x_min) / (num_x - 1)
+dt = 0.4 * dx**2 / alpha
+num_steps = int(final_time / dt)
+
+r = alpha * dt / dx**2
+
+# Grid and initial condition
+x = np.linspace(x_min, x_max, num_x)
+u = np.sin(np.pi * x)
+
+# Boundary conditions
+u[0] = 0.0
+u[-1] = 0.0
+
+# Time stepping
+for n in range(num_steps):
+    u_new = u.copy()
+
+    for j in range(1, num_x - 1):
+        u_new[j] = u[j] + r * (u[j - 1] - 2*u[j] + u[j + 1])
+
+    u_new[0] = 0.0
+    u_new[-1] = 0.0
+    u = u_new
+
+# Plot the final approximation
+plt.plot(x, u)
+plt.xlabel("x")
+plt.ylabel("temperature")
+plt.title("Approximate solution of the heat equation")
+plt.show()
+\end{verbatim}
+
+The script first defines the physical and numerical parameters. It then creates the spatial grid, applies the initial condition, and advances the solution in time. The inner loop applies the finite difference formula from Equation~\ref{eq:explicit-heat-method} at each interior grid point.
+
+\section{MATLAB Example}
+\label{sec:matlab-example}
+
+\noindent\textbf{Code Example 2.}
+The following MATLAB script implements the same numerical method. Including both examples is useful in a template because some students work primarily in Python, while others work in MATLAB.
+
+\begin{verbatim}
+% Parameters
+alpha = 1.0;
+x_min = 0.0;
+x_max = 1.0;
+final_time = 0.05;
+
+num_x = 51;
+dx = (x_max - x_min) / (num_x - 1);
+dt = 0.4 * dx^2 / alpha;
+num_steps = floor(final_time / dt);
+
+r = alpha * dt / dx^2;
+
+% Grid and initial condition
+x = linspace(x_min, x_max, num_x);
+u = sin(pi * x);
+
+% Boundary conditions
+u(1) = 0.0;
+u(end) = 0.0;
+
+% Time stepping
+for n = 1:num_steps
+    u_new = u;
+
+    for j = 2:num_x-1
+        u_new(j) = u(j) + r * (u(j-1) - 2*u(j) + u(j+1));
+    end
+
+    u_new(1) = 0.0;
+    u_new(end) = 0.0;
+    u = u_new;
+end
+
+% Plot the final approximation
+plot(x, u, 'LineWidth', 2)
+xlabel('x')
+ylabel('temperature')
+title('Approximate solution of the heat equation')
+grid on
+\end{verbatim}
+
+The MATLAB and Python versions implement the same mathematical method. The indexing differs because MATLAB arrays start at index \(1\), while Python arrays start at index \(0\).
+
+\section{A Small Numerical Summary}
+\label{sec:numerical-summary}
+
+Table~\ref{tab:computational-summary} shows a small example of how computational results might be summarized. The table uses real text and column headers rather than a screenshot of program output.
+
+\begin{table}[htbp]
+\caption{Sample numerical summary for the explicit heat equation computation.}
+\label{tab:computational-summary}
+\centering
+\begin{tabular}{llll}
+\toprule
+Grid points & Time step & Stability ratio \(r\) & Qualitative behavior \\
+\midrule
+\(25\)  & \(6.94\cdot 10^{-4}\) & \(0.40\) & Stable \\
+\(51\)  & \(1.60\cdot 10^{-4}\) & \(0.40\) & Stable \\
+\(101\) & \(4.00\cdot 10^{-5}\) & \(0.40\) & Stable \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A table like this is usually easier to read than a screenshot of a terminal window. If a table becomes too large, the student should consider using a `longtable` or moving detailed results to an appendix.
+
+\section{A Simple Workflow Diagram}
+\label{sec:workflow-diagram}
+
+Figure~\ref{fig:computational-workflow} gives a schematic workflow for a computational experiment. This is the kind of figure that might appear in a computer science, engineering, or data science dissertation.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=1.1cm,
+  >=Latex,
+  box/.style={
+    draw,
+    rounded corners=3pt,
+    minimum width=3.2cm,
+    minimum height=0.8cm,
+    align=center
+  },
+  arrow/.style={->, thick},
+  alt={A vertical workflow diagram with five boxes. The boxes read define model, choose grid, run simulation, check stability, and analyze output. Arrows point downward from each step to the next.}
+]
+  \node[box] (model) {Define model};
+  \node[box, below=of model] (grid) {Choose grid};
+  \node[box, below=of grid] (run) {Run simulation};
+  \node[box, below=of run] (check) {Check stability};
+  \node[box, below=of check] (analyze) {Analyze output};
+
+  \draw[arrow] (model) -- (grid);
+  \draw[arrow] (grid) -- (run);
+  \draw[arrow] (run) -- (check);
+  \draw[arrow] (check) -- (analyze);
+\end{tikzpicture}
+\caption{A simple workflow for a computational experiment. The researcher defines the model, chooses a grid, runs the simulation, checks stability, and analyzes the output.}
+\label{fig:computational-workflow}
+\end{figure}
+
+\section{Accessibility Notes for Code and Algorithms}
+\label{sec:code-accessibility-notes}
+
+Code should not be included as a screenshot. Screenshots of code are difficult to search, enlarge, copy, or interpret with assistive technology. Instead, use a real text block, and explain the purpose of the code before or after the block.
+
+For accessible computational writing, authors should follow these practices.
+
+\begin{enumerate}
+  \item Introduce the mathematical or computational problem before showing code.
+  \item Keep code examples short when possible.
+  \item Explain important variables in prose.
+  \item Avoid using color alone to communicate meaning in code or figures.
+  \item Do not paste screenshots of terminal output, tables, or source code.
+  \item Put long scripts in an appendix or a repository, and include only essential excerpts in the main text.
+\end{enumerate}
+
+These habits help readers understand both the computation and the reason it matters.

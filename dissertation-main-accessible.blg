@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: dissertation-main-accessible.aux
+A level-1 auxiliary file: front-accessible.aux
+A level-1 auxiliary file: Chapter-1/Chapter-1-demo.aux
+A level-1 auxiliary file: Chapter-2/Chapter-2-demo.aux
+A level-1 auxiliary file: Chapter-3/Chapter-3-demo.aux
+A level-1 auxiliary file: Chapter-4/Chapter-4-demo.aux
+A level-1 auxiliary file: Chapter-5/Chapter-5-demo.aux
+A level-1 auxiliary file: Chapter-6/Chapter-6-demo.aux
+The style file: apalike.bst
+A level-1 auxiliary file: Appendix-A/Appendix-A.aux
+A level-1 auxiliary file: Appendix-B/Appendix-B.aux
+Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "kiladis2006three"
+Warning--I didn't find a database entry for "tomassini2017interaction"
+You've used 4 entries,
+            1935 wiz_defined-function locations,
+            509 strings with 4643 characters,
+and the built_in function-call counts, 1405 in all, are:
+= -- 142
+> -- 40
+< -- 4
++ -- 14
+- -- 12
+* -- 108
+:= -- 253
+add.period$ -- 16
+call.type$ -- 4
+change.case$ -- 24
+chr.to.int$ -- 4
+cite$ -- 4
+duplicate$ -- 56
+empty$ -- 105
+format.name$ -- 20
+if$ -- 273
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 27
+num.names$ -- 12
+pop$ -- 18
+preamble$ -- 1
+purify$ -- 26
+quote$ -- 0
+skip$ -- 43
+stack$ -- 0
+substring$ -- 94
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 20
+warning$ -- 0
+while$ -- 12
+width$ -- 0
+write$ -- 62
+(There were 2 warnings)

@@ -1,0 +1,73 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ncsu-accessibility}[2026/04/30 First-pass accessibility helpers for NC State ETDs]
+
+\RequirePackage{graphicx}
+\RequirePackage{xparse}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{caption}
+
+% Figure helper requiring alt text.
+% Usage:
+% \accessiblefigure[placement][width]{file}{alt text}{caption}{label}
+\NewDocumentCommand{\accessiblefigure}{O{htbp} O{\textwidth} m m m m}{%
+  \begin{figure}[#1]
+    \centering
+    \includegraphics[width=#2,alt={#4}]{#3}%
+    \caption{#5}%
+    \label{#6}%
+  \end{figure}%
+}
+
+% Cropped figure helper requiring alt text.
+% Usage:
+% \accessiblefigurecropped[placement][width]{trim spec}{file}{alt text}{caption}{label}
+\NewDocumentCommand{\accessiblefigurecropped}{O{htbp} O{\textwidth} m m m m m}{%
+  \begin{figure}[#1]
+    \centering
+    \includegraphics[trim={#3},clip,width=#2,alt={#5}]{#4}%
+    \caption{#6}%
+    \label{#7}%
+  \end{figure}%
+}
+
+% Use this for short, descriptive links. Avoid raw URLs in body text.
+% Usage: \accesslink{https://example.edu}{descriptive link text}
+\NewDocumentCommand{\accesslink}{m m}{\href{#1}{#2}}
+
+% A small visible author reminder. Remove resolved reminders before submission.
+\NewDocumentCommand{\accessibilitytodo}{m}{%
+  \par\noindent\fbox{\begin{minipage}{0.95\linewidth}\textbf{Accessibility reminder:} #1\end{minipage}}\par%
+}
+
+
+%%----------------------------------------------------------------------------%%
+%% Accessible chapter heading style
+%%----------------------------------------------------------------------------%%
+%% The original NC State class inherits the default book-class numbered
+%% chapter heading, which is very large. This keeps the chapter structure
+%% semantic while using a more readable visual style.
+
+\makeatletter
+
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{1.25\baselineskip}%
+  {\parindent \z@ \raggedright \normalfont
+    {\Large\bfseries Chapter \thechapter\par}%
+    \vspace{0.75\baselineskip}%
+    {\Large\bfseries #1\par}%
+    \vspace{1.75\baselineskip}%
+  }%
+}
+
+\renewcommand{\@makeschapterhead}[1]{%
+  \vspace*{1.5\baselineskip}%
+  {\parindent \z@ \raggedright \normalfont
+    {\Large\bfseries #1\par}%
+    \vspace{2\baselineskip}%
+  }%
+}
+
+\makeatother

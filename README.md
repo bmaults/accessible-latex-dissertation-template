@@ -2,13 +2,13 @@
 
 This template is an accessible LaTeX dissertation/thesis template for NC State ETDs. It is designed for LuaLaTeX and aims to support tagged PDF, PDF/UA-2, and PDF/A-4f workflows.
 
-Compile this file:
+To actually create your dissertation PDF, you will compile this file
 
 ```text
 dissertation-main-accessible.tex
 ```
 
-Use LuaLaTeX, not pdfLaTeX.
+use LuaLaTeX (not pdfLaTeX). I use TeXShop.
 
 ## Main files
 

@@ -161,7 +161,7 @@ This is normal. Large LaTeX documents often need several LuaLaTeX runs. The tabl
 
 ### Fonts cause errors
 
-Font choices are in `optional-accessible.tex`. The current optional font is Libertinus. If there is a font problem, comment out the optional font commands.
+Font choices are in `optional-accessible.tex`. The current optional font is Libertinus. If there is a font problem, comment out the optional font commands and revert to the default Computer Modern for LaTeX.
 
 ### Old packages break the template
 

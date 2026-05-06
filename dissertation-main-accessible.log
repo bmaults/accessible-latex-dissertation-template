@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.15)  6 MAY 2026 17:26
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2026.1.15)  6 MAY 2026 18:37
  restricted system commands enabled.
  file:line:error style messages enabled.
 **dissertation-main-accessible.tex
@@ -2369,6 +2369,7 @@ Package microtype Info: Character `guilsinglright ' is missing
 
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2]
 warning  (pdf backend): ignoring duplicate destination with the name 'page.i'
 
 warning  (pdf backend): ignoring duplicate destination with the name 'page.i'
@@ -2385,28 +2386,86 @@ warning  (pdf backend): ignoring duplicate destination with the name 'page.i'
 warning  (pdf backend): ignoring duplicate destination with the name 'page.i'
 [1
 
-] [2
+]
+Overfull \hbox (13.63701pt too wide) in paragraph at lines 61--62
+[]\TU/LibertinusSerif(0)/m/n/12 Put your own short­cuts, no­ta­tion, and stud
+ent-specific pack­ages in \TU/LibertinusMono(0)/m/n/12 student-macros.tex\TU/L
+ibertinusSerif(0)/m/n/12 .
+ []
 
 
-] [3
+Overfull \hbox (14.16656pt too wide) in paragraph at lines 61--62
+\TU/LibertinusSerif(0)/m/n/12 For ex­am­ple, if you re­peat­edly use a com
+­mand such as \TU/LibertinusMono(0)/m/n/12 \newcommand{\R}{\mathbb{R}}\TU/Libe
+rtinusSerif(0)/m/n/12 ,
+ []
 
 
-] [4
+Overfull \hbox (37.74461pt too wide) in paragraph at lines 64--65
+[]\TU/LibertinusSerif(0)/m/n/12 You should usu­ally not edit sup­port files su
+ch as \TU/LibertinusMono(0)/m/n/12 ncsuthesis.cls\TU/LibertinusSerif(0)/m/n/12 
+, \TU/LibertinusMono(0)/m/n/12 ncsu-accessibility.sty\TU/LibertinusSerif(0)/m/n
+/12 ,
+ []
 
 
-] [5] (./dissertation-main-accessible.toc [6
+warning  (pdf backend): ignoring duplicate destination with the name 'page.ii'
+
+warning  (pdf backend): ignoring duplicate destination with the name 'page.ii'
+[2
+
+
+] [3]
+Overfull \hbox (11.57156pt too wide) in paragraph at lines 95--95
+[]    \TU/LibertinusMono(0)/m/n/12 alt={Briefly describe the important visual co
+ntent of the figure.}[] 
+ []
+
+
+Overfull \hbox (38.19565pt too wide) in paragraph at lines 95--95
+[]  \TU/LibertinusMono(0)/m/n/12 \caption{Caption explaining how the figure is 
+used in the dissertation.}[] 
+ []
+
+[4
+
+
+]
+Overfull \hbox (729.75624pt too wide) in paragraph at lines 109--109
+[]\TU/LibertinusMono(0)/m/n/12 \caption[The Pythagorean Theorem]{The Pythagorean
+ Theorem says \(a^2 + b^2 = c^2.\) (The first part in square brackets appears in
+ the TOC, the second part in the thesis itself.)} 
+ []
+
+[5] [6
+
+
+]
+Overfull \hbox (9.06566pt too wide) in paragraph at lines 153--154
+[]\TU/LibertinusSerif(0)/m/n/12 For rou­tine writ­ing and edit­ing, the ac
+­ces­si­bil­ity meta­data block at the top of \TU/LibertinusMono(0)/m/n/12
+ dissertation-
+ []
+
+
+Overfull \hbox (0.58913pt too wide) in paragraph at lines 163--163
+[]\TU/LibertinusMono(0)/m/n/12 Please explain what the errors mean, which ones 
+are likely caused by[] 
+ []
+
+[7] [8] (./dissertation-main-accessible.toc [9
 
 
 ])
 \tf@toc=\write6
 
 \openout6 = dissertation-main-accessible.toc
- [7]
+ [10]
 (./dissertation-main-accessible.lot)
 \tf@lot=\write7
 
 \openout7 = dissertation-main-accessible.lot
- [8
+ [11
 
 
 ] (./dissertation-main-accessible.lof
@@ -2419,10 +2478,10 @@ for re­duc­ing ace­tophe­none to 1-phenylethanol.
 \tf@lof=\write8
 
 \openout8 = dissertation-main-accessible.lof
- [9
+ [12
 
 
-]) [10
+]) [13
 
 
 ]
@@ -2436,9 +2495,9 @@ Chapter 1.
 
 
 ] [2]
-Floatstructure:848
+Floatstructure:967
 [3]
-Floatstructure:1100
+Floatstructure:1219
 
 Package natbib Warning: Citation `kiladis2006three' on page 4 undefined on inpu
 t line 160.
@@ -2451,23 +2510,7 @@ Package natbib Warning: Citation `tomassini2017interaction' on page 4 undefined
 
 Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
 (tagpdf)                Relation is not allowed! on line 13
-(tagpdf)                struct 1268, mo --> struct 1269, math
-
-
-Package tagpdf Warning: structure with label 1214 has already been used
-
-
-Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
-(tagpdf)                Relation is not allowed! on line 19
-(tagpdf)                struct 1279, mo --> struct 1280, math
-
-
-Package tagpdf Warning: structure with label 1236 has already been used
-
-
-Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
-(tagpdf)                Relation is not allowed! on line 19
-(tagpdf)                struct 1389, mo --> struct 1390, math
+(tagpdf)                struct 1387, mo --> struct 1388, math
 
 
 Package tagpdf Warning: structure with label 1333 has already been used
@@ -2475,40 +2518,56 @@ Package tagpdf Warning: structure with label 1333 has already been used
 
 Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
 (tagpdf)                Relation is not allowed! on line 19
-(tagpdf)                struct 1400, mo --> struct 1401, math
+(tagpdf)                struct 1398, mo --> struct 1399, math
 
 
 Package tagpdf Warning: structure with label 1355 has already been used
+
+
+Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
+(tagpdf)                Relation is not allowed! on line 19
+(tagpdf)                struct 1508, mo --> struct 1509, math
+
+
+Package tagpdf Warning: structure with label 1452 has already been used
+
+
+Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
+(tagpdf)                Relation is not allowed! on line 19
+(tagpdf)                struct 1519, mo --> struct 1520, math
+
+
+Package tagpdf Warning: structure with label 1474 has already been used
 
 [5]
 
 Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
 (tagpdf)                Relation is not allowed! on line 19
-(tagpdf)                struct 1558, mo --> struct 1559, math
+(tagpdf)                struct 1677, mo --> struct 1678, math
 
 
-Package tagpdf Warning: structure with label 1513 has already been used
+Package tagpdf Warning: structure with label 1632 has already been used
 
-Floatstructure:1588
+Floatstructure:1707
 [6] [7]) [8]
 \openout2 = Chapter-2/Chapter-2-demo.aux
  (./Chapter-2/Chapter-2-demo.tex
 Chapter 2.
-Floatstructure:1895
+Floatstructure:2014
 [9
 
 
 
 
 ]
-Floatstructure:1929
+Floatstructure:2048
 
 Underfull \hbox (badness 7186) in paragraph at lines 65--65
 []|$\TU/LibertinusMath(1)/m/n/12 0[][]$ \TU/LibertinusSerif(0)/m/n/12 to room
  []
 
 [10]
-Floatstructure:2068
+Floatstructure:2187
 
 Underfull \hbox (badness 10000) in paragraph at lines 88--88
 []|\TU/LibertinusSerif(0)/m/n/12 In­frared spec­
@@ -2532,25 +2591,25 @@ Chapter 3.
 
 Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
 (tagpdf)                Relation is not allowed! on line 19
-(tagpdf)                struct 2423, mo --> struct 2424, math
+(tagpdf)                struct 2542, mo --> struct 2543, math
 
 
-Package tagpdf Warning: structure with label 2378 has already been used
+Package tagpdf Warning: structure with label 2497 has already been used
 
 
 Package tagpdf Warning: Parent-Child 'mathml:mo' --> 'mathml:math'.
 (tagpdf)                Relation is not allowed! on line 13
-(tagpdf)                struct 2469, mo --> struct 2470, math
+(tagpdf)                struct 2588, mo --> struct 2589, math
 
 
-Package tagpdf Warning: structure with label 2445 has already been used
+Package tagpdf Warning: structure with label 2564 has already been used
 
 [15]
-Floatstructure:2695
+Floatstructure:2814
 [16]
-Floatstructure:2742
+Floatstructure:2861
 [17]
-Floatstructure:2811
+Floatstructure:2930
 Package epstopdf Info: Source file: <Chapter-1/figs/gfgnge_vs_year.eps>
 (epstopdf)                    date: 2026-04-29 20:11:26
 (epstopdf)                    size: 711026 bytes
@@ -2562,7 +2621,7 @@ d-to.pdf>
 ear-eps-converted-to.pdf Chapter-1/figs/gfgnge_vs_year.eps>
 (epstopdf)             \includegraphics on input line 157.
 Package epstopdf Info: Output file is already uptodate.
-<Chapter-1/figs/gfgnge_vs_year-eps-converted-to.pdf, id=3917, 542.025pt x 542.0
+<Chapter-1/figs/gfgnge_vs_year-eps-converted-to.pdf, id=4084, 542.025pt x 542.0
 25pt>
 File: Chapter-1/figs/gfgnge_vs_year-eps-converted-to.pdf Graphic file (type pdf
 )
@@ -2575,20 +2634,20 @@ ed on input line 157.
 
 (./Chapter-4/Chapter-4-demo.tex
 Chapter 4.
-Floatstructure:2869
-<Chapter-1/figs/Damage.png, id=4005, 986.9372pt x 724.95844pt>
+Floatstructure:2988
+<Chapter-1/figs/Damage.png, id=4172, 986.9372pt x 724.95844pt>
 File: Chapter-1/figs/Damage.png Graphic file (type png)
 <use Chapter-1/figs/Damage.png>
 Package luatex.def Info: Chapter-1/figs/Damage.png  used on input line 19.
 (luatex.def)             Requested size: 451.68752pt x 331.79245pt.
-Floatstructure:2882
+Floatstructure:3001
 [20
 
 
 
 
 ] [21<./Chapter-1/figs/Damage.png>]
-Floatstructure:2987
+Floatstructure:3106
 [22] [23]) [24]
 \openout2 = Chapter-5/Chapter-5-demo.aux
  (./Chapter-5/Chapter-5-demo.tex
@@ -2599,9 +2658,9 @@ Chapter 5.
 
 
 ] [26] [27] [28]
-Floatstructure:3572
+Floatstructure:3691
 [29]
-Floatstructure:3668
+Floatstructure:3787
 [30]) [31]
 \openout2 = Chapter-6/Chapter-6-demo.aux
  (./Chapter-6/Chapter-6-demo.tex
@@ -2665,8 +2724,8 @@ MathML statistic
 ==> 172 MathML AF attached
 
 Package tagpdf Info: Finalizing the tagging structure:
-(tagpdf)             Writing out ~3974 structure objects
-(tagpdf)             with ~3052 'MC' leaf nodes.
+(tagpdf)             Writing out ~4093 structure objects
+(tagpdf)             with ~3114 'MC' leaf nodes.
 (tagpdf)             Be patient if there are lots of objects!
 
 Package tagpdf Info: writing ParentTree
@@ -2679,15 +2738,15 @@ Package tagpdf Info: writing Root
 )
 
 Here is how much of LuaTeX's memory you used:
- 51998 strings out of 476081
+ 52287 strings out of 476081
  125240,2848258 words of node,token memory allocated
  1225 words of node memory still in use:
    8 hlist, 2 vlist, 2 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_ke
 rn, 4 glyph, 195 attribute, 83 glue_spec, 71 attribute_list, 5 write nodes
-   avail lists: 1:3,2:9001,3:1821,4:369,5:466,6:130,7:7385,8:61,9:667,10:10,11:5
-07
- 72666 multiletter control sequences out of 65536+600000
- 91 fonts using 31555607 bytes
+   avail lists: 1:3,2:9001,3:1821,4:365,5:495,6:130,7:7872,8:61,9:667,10:10,11:5
+59
+ 72919 multiletter control sequences out of 65536+600000
+ 91 fonts using 31555475 bytes
  161i,12n,118p,1208b,1296s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/opentype/public/libertinus-fonts/Liber
 tinusSerif-Regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public
@@ -2700,10 +2759,10 @@ public/libertinus-fonts/LibertinusMono-Regular.otf></usr/local/texlive/2025/texm
 f-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/
 local/texlive/2025/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusS
 erif-Bold.otf>
-Output written on dissertation-main-accessible.pdf (51 pages, 2159229 bytes).
+Output written on dissertation-main-accessible.pdf (55 pages, 2177153 bytes).
 
-PDF statistics: 5706 PDF objects out of 6186 (max. 8388607)
- 5330 compressed objects within 54 object streams
- 233 named destinations out of 1000 (max. 131072)
- 23295 words of extra memory for PDF output out of 24413 (max. 100000000)
+PDF statistics: 5875 PDF objects out of 6186 (max. 8388607)
+ 5494 compressed objects within 55 object streams
+ 251 named destinations out of 1000 (max. 131072)
+ 23900 words of extra memory for PDF output out of 24413 (max. 100000000)
 

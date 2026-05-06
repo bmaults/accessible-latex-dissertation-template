@@ -1,6 +1,6 @@
-\contentsline {chapter}{List of Tables}{viii}{chapter*.8}%
-\contentsline {chapter}{List of Figures}{ix}{chapter*.9}%
-\contentsline {chapter}{Authorship Statement}{x}{chapter*.10}%
+\contentsline {chapter}{List of Tables}{xi}{chapter*.23}%
+\contentsline {chapter}{List of Figures}{xii}{chapter*.24}%
+\contentsline {chapter}{Authorship Statement}{xiii}{chapter*.25}%
 \contentsline {chapter}{\numberline {1}THE FUNDAMENTAL THEOREM OF LINE INTEGRALS}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Purpose of This Sample Chapter}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}A First Definition}{1}{section.1.2}%
@@ -57,8 +57,8 @@
 \contentsline {section}{\numberline {6.1}Summary of Results}{32}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Overarching Conclusions}{32}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Future Work}{33}{section.6.3}%
-\contentsline {chapter}{References}{34}{chapter*.68}%
-\contentsline {chapter}{APPENDICES}{35}{chapter*.73}%
+\contentsline {chapter}{References}{34}{chapter*.83}%
+\contentsline {chapter}{APPENDICES}{35}{chapter*.88}%
 \ncsu@tocappendixtrue \setcounter {tocdepth}{\c@ncsu@appendixtocdepth }
 \contentsline {chapter}{\numberline {A}Acronyms}{36}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Variables}{38}{appendix.B}%

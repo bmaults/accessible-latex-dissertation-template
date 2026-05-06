@@ -3,13 +3,29 @@
 
 This abstract, as well as the Dedication, Biography, and Acknowledgements below, is being used as a short orientation to this template. Before final submission, replace this entire abstract with the actual dissertation abstract. You can find this section, along with the Dedication, Biography, and Acknowledgements, in the \texttt{front-accessible.tex} file.
 
-These instructions are meant to help you get started gently. You do not need to understand every file in the template before you begin. The main idea is that a thesis or dissertation is too large to keep comfortably in one file, so this project is split into a main file, a front matter file, chapter files, appendix files, a bibliography file, and a few template support files.
+These instructions are meant to help you get started gently. You do not need to understand every file in the template before you begin. The main idea is that a thesis or dissertation is too large to keep comfortably in one file, so this project is split into a main file, a front matter file, chapter files, appendix files, a bibliography file, and a few support files.
 
-The main file is \texttt{dissertation-main-accessible.tex}. This is the file you compile to create your thesis PDF. It controls the document setup, packages, front matter, chapters, bibliography, and appendices. The student name, title, degree program, degree year, committee information, and PDF metadata text are stored in \texttt{student-information.tex}. The front matter is stored in \texttt{front-accessible.tex}. The bibliography entries are stored in \texttt{StudentName-thesis.bib}. Hyperlink settings are stored in \texttt{optional-accessible.tex}.
+The main file is \texttt{dissertation-main-accessible.tex}. This is the file you compile to create your thesis or dissertation PDF. It controls the document setup, accessibility metadata, packages, front matter, chapters, bibliography, and appendices.
+
+Several smaller files keep the template organized:
+
+\begin{itemize}
+  \item \texttt{student-information.tex} stores the student name, dissertation title, degree program, degree year, committee information, and PDF metadata text.
+
+  \item \texttt{front-accessible.tex} stores the front matter, including the abstract, dedication, biography, acknowledgements, table of contents, list of tables, list of figures, and authorship statement.
+
+  \item \texttt{bibliography.bib} stores the bibliography entries.
+
+  \item \texttt{ncsu-required.tex} stores required NC State formatting and accessibility settings.
+
+  \item \texttt{student-macros.tex} stores student-specific packages, commands, notation, and macros.
+
+  \item \texttt{optional-accessible.tex} stores optional visual choices, such as font choices, chapter heading style, and theorem box style.
+\end{itemize}
 
 The main chapters are stored in separate folders, such as \texttt{Chapter-1/Chapter-1.tex}, \texttt{Chapter-2/Chapter-2.tex}, and \texttt{Chapter-3/Chapter-3.tex}. Appendices are stored in separate appendix folders. Keeping this folder structure intact is important. If you rename a file or folder, you must also update the corresponding \texttt{\textbackslash include\{...\}} line in the main file.
 
-This template must be compiled with LuaLaTeX. The ``scholarly content" in the sample chapters is placeholder material only. It is included to test chapter structure, figures, tables, mathematical content, citations, appendices, and accessibility features. Much of the placeholder content was generated with AI.
+This template must be compiled with LuaLaTeX. The sample chapters are placeholder material only. They are included to test chapter structure, figures, tables, mathematical content, citations, appendices, and accessibility features. Much of the placeholder content was generated with AI.
 
 \end{abstract}
 
@@ -22,15 +38,32 @@ This template must be compiled with LuaLaTeX. The ``scholarly content" in the sa
 
 %% -------------------------------- Dedication ------------------------------ %%
 \begin{dedication}
+
 This Dedication is being used for template instructions. Before final submission, replace this text with your own dedication, or remove the dedication if you do not want to include one.
 
-When you begin adapting the template, start with small edits. First, open \texttt{student-information.tex} and update the student name, dissertation title, committee information, program name, degree year, PDF subject, and PDF keywords. Then compile. (Important reminder: This template must be compiled with LuaLaTeX.)
+When you begin adapting the template, start with small edits. First, open \texttt{student-information.tex} and update the student name, dissertation title, committee information, program name, degree year, PDF subject, and PDF keywords. Then compile. Important reminder: this template must be compiled with LuaLaTeX.
 
 Do not move individual files out of the project folder. The files refer to each other using paths such as \texttt{Chapter-5/Chapter-5.tex}. This means LaTeX expects to find a folder called \texttt{Chapter-5} and a file inside it called \texttt{Chapter-5.tex}. If you move files around, LaTeX may not be able to find them.
 
 The table of contents, list of figures, and list of tables are made automatically by LaTeX. You do not type these pages by hand. Instead, LaTeX builds them from your chapter titles, section titles, figure captions, and table captions. If you change a title or caption and the table of contents does not update right away, compile again. It often takes more than one run for LaTeX to update these lists correctly.
 
-You should usually not edit template support files such as \texttt{ncsuthesis.cls}, \texttt{ncsu-accessibility.sty}, \texttt{changepage.sty}, or \texttt{totcount.sty}. These files control the template, formatting, or helper commands. Most of your work should happen in \texttt{student-information.tex}, \texttt{front-accessible.tex}, the chapter files, the appendix files, and \texttt{StudentName-thesis.bib}.
+Most of your edits should happen in the files listed below:
+
+\begin{itemize}
+  \item Write your main thesis or dissertation content in the chapter files, such as \texttt{Chapter-1/Chapter-1.tex}, \texttt{Chapter-2/Chapter-2.tex}, and so on.
+
+  \item Write your abstract, dedication, biography, acknowledgements, and authorship statement in \texttt{front-accessible.tex}.
+
+  \item Write appendix material in the appendix files, such as \texttt{Appendix-A/Appendix-A.tex} and \texttt{Appendix-B/Appendix-B.tex}. Appendices are a good place for supporting material, longer tables, extra figures, code documentation, survey instruments, or proofs that do not belong in the main chapters.
+
+  \item Put cited works in \texttt{bibliography.bib}. Each source should have a BibTeX entry with a citation key, and your chapters should cite those sources using the matching key.
+
+  \item Put your own shortcuts, notation, and student-specific packages in \texttt{student-macros.tex}. For example, if you repeatedly use a command such as \texttt{\textbackslash newcommand\{\textbackslash R\}\{\textbackslash mathbb\{R\}\}}, that belongs in \texttt{student-macros.tex}. This keeps your personal notation separate from the required template files.
+\end{itemize}
+
+You should usually not edit support files such as \texttt{ncsuthesis.cls}, \texttt{ncsu-accessibility.sty}, \texttt{changepage.sty}, or \texttt{apalike.bst}. These files control the thesis class, helper commands, page layout support, or bibliography style.
+
+The file \texttt{ncsu-required.tex} contains required template settings for the accessible NC State thesis or dissertation build. The file \texttt{optional-accessible.tex} contains optional visual choices. If something is only a design preference, it belongs in \texttt{optional-accessible.tex}, not in \texttt{ncsu-required.tex}. Options in \texttt{optional-accessible.tex} include font choices and theorem environments.
 
 \end{dedication}
 
@@ -39,23 +72,45 @@ You should usually not edit template support files such as \texttt{ncsuthesis.cl
 
 This Biography is being used for accessibility guidance. Before final submission, replace this text with your actual biography.
 
-The goal of this template is to make the final PDF more accessible than a traditional LaTeX thesis or dissertation PDF. The template can help with tagging and structure, but accessibility also depends on the choices you make while writing.
+The goal of this template is to make the final PDF more accessible than a traditional LaTeX thesis or dissertation PDF. The template can help with tagging, structure, metadata, figure descriptions, and mathematical accessibility, but accessibility also depends on the choices you make while writing.
 
 Use real LaTeX structure. Write chapters with \texttt{\textbackslash chapter}, sections with \texttt{\textbackslash section}, and subsections with \texttt{\textbackslash subsection}. Do not simulate headings by manually changing font size or using bold text alone.
 
-Write equations in LaTeX. Do not insert equations as screenshots. Use labels for equations, figures, tables, sections, and chapters that you need to refer to later. Do not manually type equation numbers, figure numbers, or table numbers. You will see examples in the demo Chapter 1 below.
+Write equations in LaTeX. Do not insert equations as screenshots. Use labels for equations, figures, tables, sections, and chapters that you need to refer to later. Do not manually type equation numbers, figure numbers, or table numbers.
 
-Give every meaningful figure a clear caption and a meaningful text description. The text description should explain the important information in the image for a reader who cannot see it. Do not rely only on color to communicate information. For mathematical figures, describe the mathematical structure, not every decorative detail.
+Give every meaningful figure a real caption and meaningful alt text. You do not need to rewrite every figure using a special command. The usual LaTeX \texttt{figure} environment is fine. The important accessibility step is to include meaningful alt text in the \texttt{\textbackslash includegraphics} command.
 
-Use real table structures for tables, and make sure tables have clear column headers. Do not use screenshots of tables unless there is no reasonable alternative. Try to keep tables simple, because complicated tables are harder to read visually and harder to make accessible.
+For example:
+
+\begin{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[
+    width=\textwidth,
+    alt={Briefly describe the important visual content of the figure.}
+  ]{figures/example.png}
+  \caption{Caption explaining how the figure is used in the dissertation.}
+  \label{fig:example}
+\end{figure}
+\end{verbatim}
+
+If you already have many figures, you usually only need to add or improve the \texttt{alt=\{...\}} text inside each \texttt{\textbackslash includegraphics} command. You do not need to change the whole structure of every figure.
+
+The template also includes optional helper commands in \texttt{ncsu-accessibility.sty}, such as \texttt{\textbackslash accessiblefigure} and \texttt{\textbackslash accessiblefigurecropped}. These are conveniences only, possibly useful for future students more than students who currently have figure environments defined. They are not required.
+
+For mathematical figures, describe the mathematical structure, not every decorative detail. Do not rely only on color to communicate information.
+
+Use real table structures for tables, and make sure tables have clear column headers. Do not use screenshots of tables unless there is no reasonable alternative. Try to keep tables simple, because complicated tables are harder to read visually and harder to make accessible. Tables must have captions.
 
 If a figure caption contains mathematics, use a math-free optional short caption so the List of Figures does not contain tagged formula content. For example, use
 
 \begin{verbatim}
-\caption[Short text caption]{Full caption with \(math.\)}
+\caption[The Pythagorean Theorem]{The Pythagorean Theorem says \(a^2 + b^2 = c^2.\) (The first part in square brackets appears in the TOC, the second part in the thesis itself.)}
 \end{verbatim}
 
-This allows the full caption under the figure to contain mathematical notation while keeping the List of Figures easier for validation tools and assistive technologies to process.
+This allows the full caption under the figure to contain mathematical notation while keeping the List of Figures easier for validation tools and assistive technologies to process. You will get errors in VeraPDF if you do not use the above structure, even if the document compiles and looks fine to you.
+
+The same idea applies to section headings and chapter headings. If a heading contains substantial mathematics, Unicode symbols, or unusual characters, consider using a simpler text version in the optional argument. Headings and captions are reused in bookmarks, the table of contents, the list of figures, and the list of tables, so simple text versions are often more reliable.
 
 Automated accessibility checkers are useful, but they do not catch everything. A PDF can pass an automated check and still be hard to use, so manual review still matters.
 
@@ -72,9 +127,17 @@ These Acknowledgements are being used for compiling and validation instructions.
 
 \item In Overleaf, set the compiler to LuaLaTeX and set the main document to \texttt{dissertation-main-accessible.tex}. The safest way to begin in Overleaf is to upload the whole project as a zip file. Uploading files one at a time can accidentally flatten the folder structure, which may cause errors when LaTeX tries to find chapter files.
 
+\item Use \texttt{student-information.tex} for the student name, dissertation title, degree program, degree year, committee information, and PDF metadata.
+
+\item Use \texttt{student-macros.tex} for student-specific packages, notation, and shortcuts. This is the right place for commands that are specific to your dissertation.
+
+\item Leave \texttt{ncsu-required.tex} in place for the final accessible NC State build. This file contains required formatting, hyperlink, PDF metadata, bookmark, caption, and theorem-like environment setup.
+
+\item Use \texttt{optional-accessible.tex} only for optional visual choices, such as font choices, chapter heading style, and theorem box appearance. If a visual option causes trouble, you can comment out the relevant option or comment out the whole optional file from the main file.
+
 \end{itemize}
 
-For citations, add your bibliography entries to \texttt{bibliography.bib}. If citations appear as question marks, run BibTeX and then run LuaLaTeX again. Without changes to the bibliography, you usually just need to run LuaLaTeX twice to update your document fully. But, with additions to the bibliography, a typical full compile sequence is:
+For citations, add your bibliography entries to \texttt{bibliography.bib}. If citations appear as question marks, run BibTeX and then run LuaLaTeX again. Without changes to the bibliography, you usually just need to run LuaLaTeX twice to update your document fully. With additions to the bibliography, a typical full compile sequence is:
 
 \begin{verbatim}
 LuaLaTeX
@@ -85,13 +148,27 @@ LuaLaTeX
 
 In TeXShop, this usually means compiling once with LuaLaTeX, then choosing BibTeX and compiling, then choosing LuaLaTeX again and compiling twice more. In Overleaf, you may only need to recompile, but if citations remain unresolved, check that Overleaf is using BibTeX correctly and that the citation keys in your chapters exactly match the keys in \texttt{bibliography.bib}.
 
-If references, citations, figure numbers, table numbers, or the table of contents look wrong, compile again before assuming something is broken. If they still look wrong after several runs, check for misspelled labels or citation keys. (The repeated LuaLaTeX runs are what allow LaTeX to update the table of contents, list of figures, list of tables, citations, and cross-references.)
+If references, citations, figure numbers, table numbers, or the table of contents look wrong, compile again before assuming something is broken. If they still look wrong after several runs, check for misspelled labels or citation keys. The repeated LuaLaTeX runs are what allow LaTeX to update the table of contents, list of figures, list of tables, citations, and cross-references.
 
-After compiling the dissertation, check the resulting PDF with \href{https://dev.verapdf-rest.duallab.com/}{VeraPDF}. The browser version is useful for quick checks, but it involves uploading your file to their website which you may not want to do. The \href{https://software.verapdf.org/}{desktop application} runs locally on your machine and is more private.
+For routine writing and editing, the accessibility metadata block at the top of \texttt{dissertation-main-accessible.tex} can make large dissertations compile slowly. For the final accessible build, turn that block back on and compile with LuaLaTeX several times. This is also the build you should use when checking PDF/A and PDF/UA validation.
+
+After compiling the dissertation, check the resulting PDF with \href{https://dev.verapdf-rest.duallab.com/}{VeraPDF}. The browser version is useful for quick checks, but it involves uploading your file to their website, which you may not want to do. The \href{https://software.verapdf.org/}{desktop application} runs locally on your machine and is more private.
+
+When you run VeraPDF, save or copy the validation results. The HTML report is especially useful because it organizes the errors by validation profile and rule. You can use ChatGPT, Gemini, or another AI tool to help interpret the report. For example, you can paste the relevant part of the VeraPDF HTML report or log and ask:
+
+\begin{verbatim}
+This is a VeraPDF validation report for my LaTeX dissertation PDF.
+Please explain what the errors mean, which ones are likely caused by
+my LaTeX source, and what files or commands I should check first.
+\end{verbatim}
+
+You can also paste a small section of the LaTeX source that seems related to the error, such as a figure, table, caption, section heading, or bibliography entry. This can be especially helpful for errors involving captions, headings, Unicode characters, list structure, table headers, or missing metadata.
+
+It is not recommended that you paste private dissertation content, unpublished data, sensitive information, or anything you are not comfortable sharing with the AI tool. If needed, replace names, data, or paragraphs with placeholders before asking for help. Automated AI feedback can be useful for troubleshooting, but you should still check the final LaTeX source and PDF yourself.
 
 For this template, the most relevant veraPDF checks are the \texttt{PDF/A-4f validation profile} and the \texttt{PDF/UA-2 + Tagged PDF validation profile}. PDF/A-4f checks archival compliance, while PDF/UA-2 checks accessibility tagging. In veraPDF, you can also leave the Validation Profile as Autodetect and the Output Format as HTML.
 
-The goal is to support more accessible thesis and dissertation PDFs and to aim for WCAG 2.1 AA accessibility principles where they apply. Using this template does not guarantee compliance.
+The goal is to support more accessible thesis and dissertation PDFs and to aim for accessible, reusable structure wherever possible. Using this template does not guarantee compliance.
 
 \end{acknowledgements}
 
@@ -111,4 +188,4 @@ List contributions clearly by chapter. Use normal list structure rather than man
 
 \vskip 1cm
 
-\noindent\textbf{Use of generative artificial intelligence:} This template was updated by Bevin Maultsby with assistance from ChatGPT. ChatGPT was used to generate content, troubleshoot compilation errors, and edit and refine the instructions. Replace this statement with the statement appropriate for your dissertation, your advisor, your program, and current university guidance.
+\noindent\textbf{Use of generative artificial intelligence:} This ETD template was updated by Bevin Maultsby in 2026 with assistance from ChatGPT. ChatGPT was used to generate placeholder content, troubleshoot compilation errors, and edit and refine the instructions. Replace this statement with the statement appropriate for your dissertation, your advisor, your program, and current university guidance.

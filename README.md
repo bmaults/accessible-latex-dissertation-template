@@ -1,6 +1,6 @@
 # NC State Accessible Dissertation Template
 
-This template is an accessible LaTeX dissertation/thesis template for NC State ETDs. It is designed for LuaLaTeX and aims to support tagged PDF, PDF/UA-2, and PDF/A-4f workflows. It aims for good accessibility practices following WCAG 2.1 AA guidance, but users are responsible for verifying the accessibility of their thesis individually.
+This template is an accessible LaTeX dissertation/thesis template for NC State ETDs. It is designed for LuaLaTeX and aims to support tagged PDF, PDF/UA-2, and PDF/A-4f workflows.
 
 Compile this file:
 
@@ -78,17 +78,24 @@ Keep required accessibility and metadata settings in `ncsu-required.tex`. Keep o
 
 ## Figures
 
-Use real captions and alt text. The template includes helper commands in `ncsu-accessibility.sty`, including:
+Use real captions and alt text. The template includes helper commands in `ncsu-accessibility.sty`, including this option:
 
 ```latex
 \accessiblefigure[placement][width]{file}{alt text}{caption}{label}
 ```
 
-and
+However, you do **not** need to use `\accessiblefigure` as the usual LaTeX `figure` environment, as set up below, should be fine:
 
 ```latex
-\accessiblefigurecropped[placement][width]{trim spec}{file}{alt text}{caption}{label}
-```
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[
+    width=\textwidth,
+    alt={Briefly describe the important visual content of the figure.}
+  ]{figures/example.png}
+  \caption{Caption explaining how the figure is used in the dissertation.}
+  \label{fig:example}
+\end{figure}
 
 Write alt text that explains the important content of the figure. Do not use equations as screenshots unless there is no reasonable alternative.
 

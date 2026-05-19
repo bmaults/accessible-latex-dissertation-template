@@ -82,12 +82,8 @@
 \addtolength{\ncsu@footskip}{2\baselineskip}
 \addtolength{\ncsu@footskip}{0.5ex}  % A little extra space to ensure there
                                      %  are 2 full double spaced lines
-\RequirePackage[includefoot,
-                margin=0.85in,
-                rmargin=1in,
-                lmargin=1.25in,
-                footskip=\ncsu@footskip]{geometry}
-
+\usepackage[margin=1in]{geometry}
+                
 %% -------------------------------------------------------------------------- %%
 %% Disposition format -- any titles, headings, section titles
 \newcommand{\ncsu@dispositionformat}{}

@@ -217,14 +217,12 @@
 %% Abstract page commands
 \newcommand{\makecopyrightpage}{
     \begin{titlepage}
-    \centering
-      \quad
-      \vspace{0.35\textheight}
-
-      \copyright{} Copyright \ncsu@year{} by \@author \\[1em]
-      All Rights Reserved
-
-      \vfill
+    \vspace*{\fill}
+    \begin{center}
+        \copyright{} Copyright \ncsu@year{} by \@author \\[1em]
+        All Rights Reserved
+    \end{center}
+    \vspace*{\fill}
     \end{titlepage}
 }
 
@@ -308,14 +306,14 @@
    A dissertation submitted to the Graduate Faculty of\\
    North Carolina State University\\
    in partial fulfillment of the\\
-   requirements for the Degree of\\
+   requirements for the degree of\\
    Doctor of Philosophy
  }{} % end ifthenels phd
  \ifthenelse{\equal{\ncsu@thesistype}{ms}}{
    A thesis submitted to the Graduate Faculty of\\
    North Carolina State University\\
    in partial fulfillment of the\\
-   requirements for the Degree of\\
+   requirements for the degree of\\
    Master of Science
  }{} % end ifthenels phd
 }

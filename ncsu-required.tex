@@ -10,6 +10,8 @@
 
 %%----------------------------------------------------------------------------%%
 %% Link colors and shared colors
+%% The soft colors are defined here because optional-accessible.tex may use
+%% them when the optional theorem-card style is enabled.
 %%----------------------------------------------------------------------------%%
 
 \usepackage{xcolor}
@@ -67,14 +69,8 @@
 %% NC State Graduate School ETD formatting
 %%----------------------------------------------------------------------------%%
 %% NC State requires most text to be the same font size as the body text.
-%% Apart from chapter headers and captions for tables and figures, section-level
-%% headings should not be larger than the body text.
-
-\sectionfont{\normalsize\bfseries}
-\subsectionfont{\normalsize\bfseries}
-\subsubsectionfont{\normalsize\bfseries}
-\paragraphfont{\normalsize\bfseries}
-\subparagraphfont{\normalsize\bfseries}
+%% Section-level heading formatting is defined directly in ncsuthesis.cls so
+%% that the template does not depend on the obsolete sectsty package.
 
 \captionsetup{
   font=normalsize,
@@ -82,10 +78,11 @@
 }
 
 %%----------------------------------------------------------------------------%%
-%% Required theorem-like environments
+%% Base theorem-like environments
 %%----------------------------------------------------------------------------%%
-%% The demo chapters and many math dissertations use theorem-like environments.
-%% These definitions are intentionally plain and final-ETD-safe:
+%% The demonstration chapters and many mathematics dissertations use these
+%% environments. The base definitions are intentionally plain and suitable
+%% for the final ETD:
 %%   - no tcolorbox,
 %%   - no amsthm theorem-like tagging structure,
 %%   - no colored backgrounds.
@@ -103,6 +100,8 @@
   \fi.}%
 }
 
+%% Arguments 3 and 4 are reserved for the optional visual style. They are
+%% intentionally unused by the plain required style below.
 \newcommand{\NCSUStatementBegin}[4]{%
   \refstepcounter{ncsuStatement}%
   \par\addvspace{12pt}%

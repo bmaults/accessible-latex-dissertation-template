@@ -14,7 +14,7 @@
 %% --------------------------------------------------------------------
 %% 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ncsuthesis}[2012/01/26 v0.4 NC State ETD conformant thesis class]
+\ProvidesClass{ncsuthesis}[2026/07/23 v0.6 NC State ETD conformant thesis class]
 %% -------------------------------------------------------------------------- %%
 %% ------------------------------ Thesis type ------------------------------- %%
 %% -------------------------------------------------------------------------- %%
@@ -50,7 +50,7 @@
 \RequirePackage{hyphenat}
 \RequirePackage{nolbreaks}
 \RequirePackage{ifthen}
-\RequirePackage{sectsty}
+
 %% The original ncsuthesis class loaded tocloft here.
 %% This accessible version does not load tocloft because tocloft interferes
 %% with linked TOC/LOF/LOT entries in tagged PDF builds.
@@ -69,7 +69,7 @@
 \newlength{\ncsu@lineheight}
 \setlength{\ncsu@lineheight}{2.0ex}
 
-%% Leading height: The leading changes thoughout the document, so this
+%% Leading height: The leading changes throughout the document, so this
 %%  length must be updated
 \newlength{\ncsu@leading}
 
@@ -82,21 +82,25 @@
 \addtolength{\ncsu@footskip}{2\baselineskip}
 \addtolength{\ncsu@footskip}{0.5ex}  % A little extra space to ensure there
                                      %  are 2 full double spaced lines
-\usepackage[margin=1in]{geometry}
+\RequirePackage[margin=1in]{geometry}
                 
 %% -------------------------------------------------------------------------- %%
-%% Disposition format -- any titles, headings, section titles
-\newcommand{\ncsu@dispositionformat}{}
-\allsectionsfont{\ncsu@dispositionformat}
-\providecommand{\dispositionformat}[1]{
-    \renewcommand{\ncsu@dispositionformat}{#1}
-    \allsectionsfont{\ncsu@dispositionformat}
-}
 
-%% Heading/Chapter/Section format
-\newcommand{\ncsu@headingformat}{\ncsu@dispositionformat}
-\providecommand{\headingformat}[1]{
-    \renewcommand{\ncsu@headingformat}{\ncsu@dispositionformat #1}
+%% Heading format
+%% Formatting applied to chapter and preliminary-page headings.
+%% Section-level headings are defined separately below.
+
+%% NC State requires most text to be the same size as the body text.
+%% Preliminary-page headings should therefore stay at \normalsize unless the
+%% Graduate School approves a different style.
+\newcommand{\ncsu@headingformat}{%
+  \normalfont
+  \normalsize
+  \bfseries
+  \MakeUppercase
+}
+\providecommand{\headingformat}[1]{%
+    \renewcommand{\ncsu@headingformat}{#1}%
 }
 
 %% \chapter*-to-first line space
@@ -156,38 +160,203 @@
 \providecommand{\thesistitle}[1]{\renewcommand{\ncsu@thesistitle}{#1}}
 
 %% -------------------------------------------------------------------------- %%
+%% Section-level heading formatting
+%% -------------------------------------------------------------------------- %%
+%% NC State requires section-level headings to use the body-text font size.
+%% These definitions replace the obsolete sectsty package while retaining the
+%% standard LaTeX sectioning mechanism, counters, bookmarks, and heading tags.
+%%
+%% The definitions are delayed until \begin{document} because current tagged-PDF
+%% support may replace sectioning definitions during preamble processing.
+
+\AtBeginDocument{%
+  \renewcommand{\section}{%
+    \@startsection
+      {section}%
+      {1}%
+      {\z@}%
+      {-3.5ex \@plus -1ex \@minus -.2ex}%
+      {2.3ex \@plus .2ex}%
+      {\normalfont\normalsize\bfseries}%
+  }%
+
+  \renewcommand{\subsection}{%
+    \@startsection
+      {subsection}%
+      {2}%
+      {\z@}%
+      {-3.25ex \@plus -1ex \@minus -.2ex}%
+      {1.5ex \@plus .2ex}%
+      {\normalfont\normalsize\bfseries}%
+  }%
+
+  \renewcommand{\subsubsection}{%
+    \@startsection
+      {subsubsection}%
+      {3}%
+      {\z@}%
+      {-3.25ex \@plus -1ex \@minus -.2ex}%
+      {1.5ex \@plus .2ex}%
+      {\normalfont\normalsize\bfseries}%
+  }%
+
+  \renewcommand{\paragraph}{%
+    \@startsection
+      {paragraph}%
+      {4}%
+      {\z@}%
+      {3.25ex \@plus 1ex \@minus .2ex}%
+      {-1em}%
+      {\normalfont\normalsize\bfseries}%
+  }%
+
+  \renewcommand{\subparagraph}{%
+    \@startsection
+      {subparagraph}%
+      {5}%
+      {\parindent}%
+      {3.25ex \@plus 1ex \@minus .2ex}%
+      {-1em}%
+      {\normalfont\normalsize\bfseries}%
+  }%
+}
+
+%% -------------------------------------------------------------------------- %%
 %% ---------------------  Chapter Commands ---------------------------------- %%
 %% -------------------------------------------------------------------------- %%
 
 %% -------------------------------------------------------------------------- %%
-%%  Redefine the \chapter* driver \@makeschapterhead. This is used for the
-%%   preliminary headings.
-%%   The spacing between the title baseline and the top of capital letters on
-%%   the first line is specified by \ncsu@afterschapsep. However, this vertical
-%%   height built by two separate lengths:
-%%       1. the space between the baseline of the title and the top of the
-%%           first line (including leading above the line).
-%%              (\ncsu@afterschapbeforeleadingsep)
-%%       2. From the top of the first line leading to the top of
-%%           capital letters on the first line. (\ncsu@leading)
+%% Chapter heading formatting
+%% -------------------------------------------------------------------------- %%
+%% Beginning with the 2026 LaTeX heading implementation, \DocumentMetadata
+%% changes \chapter and \chapter* so that they use heading-template instances.
+%% In that situation, redefining only \@makechapterhead and
+%% \@makeschapterhead no longer changes the visible headings. We therefore
+%% provide both implementations:
+%%
+%%   1. template instances for current accessible builds; and
+%%   2. the traditional book-class drivers for builds without \DocumentMetadata.
+%%
+%% In both cases, the public \chapter and \chapter* commands remain responsible
+%% for page breaks, bookmarks, counters, table-of-contents entries, running
+%% marks, and semantic heading tags. Do not call \@makeschapterhead directly.
+
 \newlength{\ncsu@afterschapbeforeleadingsep}
-\AtBeginDocument{% at begin doc is necessary since fncychap
-                 %  redefines \@makeschapterhead
-    \renewcommand{\@makeschapterhead}[1]{%
-        % Measure the leading here (which depends on the current line spacing),
-        % and adjust the spacing accordingly between the baseline of the
-        % heading and the top of capital letters on the first line.
-        \setlength{\ncsu@leading}{\baselineskip-\ncsu@capitalheight}%
-        \setlength{\ncsu@afterschapbeforeleadingsep}%
-                  {\ncsu@afterschapsep-\ncsu@leading}%
-        {\noindent\centering%
-          {\ncsu@headingformat #1}%
-          \par\nobreak%
-          \vspace{\ncsu@afterschapbeforeleadingsep}}%
-    }
+
+\@ifundefined{ParseLaTeXeHeading}{%
+  %% ------------------------------------------------------------------------ %%
+  %% Traditional LaTeX heading implementation
+  %% ------------------------------------------------------------------------ %%
+  \ClassInfo{ncsuthesis}{Using traditional chapter-heading drivers}%
+
+  %% Numbered chapters.
+  \renewcommand{\@makechapterhead}[1]{%
+    \vspace*{1.25\baselineskip}%
+    {%
+      \parindent\z@
+      \raggedright
+      \normalfont
+      {\Large\bfseries Chapter \thechapter\par}%
+      \vspace{0.75\baselineskip}%
+      {\Large\bfseries #1\par}%
+      \vspace{1.75\baselineskip}%
+    }%
+  }
+
+  %% Unnumbered chapters and preliminary-page headings.
+  \renewcommand{\@makeschapterhead}[1]{%
+    \setlength{\ncsu@leading}{\baselineskip-\ncsu@capitalheight}%
+    \setlength{\ncsu@afterschapbeforeleadingsep}{%
+      \ncsu@afterschapsep-\ncsu@leading
+    }%
+    {%
+      \noindent
+      \centering
+      {\ncsu@headingformat #1}%
+      \par\nobreak
+      \vspace{\ncsu@afterschapbeforeleadingsep}%
+    }%
+  }
+}{%
+  %% ------------------------------------------------------------------------ %%
+  %% LaTeX 2026 heading-template implementation used with \DocumentMetadata
+  %% ------------------------------------------------------------------------ %%
+  \ClassInfo{ncsuthesis}{Using tagged-PDF chapter-heading templates}%
+
+  %% The numbered chapter format places the chapter label and title on
+  %% separate lines, matching the traditional class definition above.
+  \DeclareInstance{headformat}{ncsu-chapter}{display}{%
+    heading-indent   = 0pt,
+    prefix-number-sep = \WordSpaceAmount{1},
+    number-title-sep = 0.75\baselineskip,
+    title-format     = {#1}%
+  }
+
+  \DeclareInstance{heading}{ncsu-chapter}{display}{%
+    name                  = chapter,
+    level                 = 0,
+    placement             = top,
+    para-indent           = false,
+    after-penalty-vspace  = 1.25\baselineskip,
+    after-vspace          = 1.75\baselineskip,
+    prefix                = \@chapapp,
+    number-format         = \thechapter,
+    heading-decls         = \raggedright\parindent\z@\normalfont\Large\bfseries,
+    title-decls           = \Large,
+    headformat-instance   = ncsu-chapter,
+    mark-cmd              = \chaptermark{#1},
+    contents-extra        = {%
+      \addtocontents{lof}{\protect\addvspace{10\p@}}%
+      \addtocontents{lot}{\protect\addvspace{10\p@}}%
+    }%
+  }
+
+  %% Preliminary headings use a separate instance because they must be
+  %% centered, uppercase, unnumbered, and body-text sized.
+  \DeclareInstance{headformat}{ncsu-chapter-star}{display}{%
+    heading-indent    = 0pt,
+    prefix-number-sep = 0pt,
+    number-title-sep  = 0pt,
+    title-format      = {\ncsu@headingformat{#1}}%
+  }
+
+  \DeclareInstance{heading}{ncsu-chapter-star}{display}{%
+    name                 = chapter,
+    level                = 0,
+    placement            = top,
+    para-indent          = false,
+    after-penalty-vspace = 0pt,
+    after-vspace         = \ncsu@afterschapsep,
+    heading-decls        = \centering\parindent\z@\normalfont,
+    headformat-instance  = ncsu-chapter-star,
+    mark-cmd             = \chaptermark{#1}%
+  }
+
+  %% Route numbered and unnumbered chapters through the appropriate instances.
+  %% The frontmatter logic mirrors the current book-class implementation: an
+  %% ordinary \chapter in front matter is unnumbered but may still create the
+  %% expected TOC entry, bookmark, and running mark.
+  \DeclareDocumentCommand\chapter{s ={shorttitle}o m}{%
+    \if@mainmatter
+      \IfBooleanTF{#1}{%
+        \ParseLaTeXeHeading{ncsu-chapter-star}{#1}{#2}{#3}%
+      }{%
+        \ParseLaTeXeHeading{ncsu-chapter}{#1}{#2}{#3}%
+      }%
+    \else
+      \IfBooleanTF{#1}{%
+        \ParseLaTeXeHeading{ncsu-chapter-star}{\BooleanTrue}{#2}{#3}%
+      }{%
+        \IfNoValueTF{#2}{%
+          \ParseLaTeXeHeading{ncsu-chapter-star}{\BooleanTrue}%
+            {shorttitle={#3}}{#3}%
+        }{%
+          \ParseLaTeXeHeading{ncsu-chapter-star}{\BooleanTrue}{#2}{#3}%
+        }%
+      }%
+    \fi
+  }
 }
-
-
 
 
 %% -------------------------------------------------------------------------- %%
@@ -200,6 +369,7 @@
    \singlespacing
    \titlepage
    \chapter*{\abstractname}
+   \noindent
    \MakeUppercase{\ncsu@authorlast{}, \ncsu@authorfirstmiddle{}}%
    \ifthenelse{\boolean{@ncsu@needsperiod}}{\@. }{~}%
     \nohyphens{\nolbreaks{\ncsu@thesistitle}.
@@ -583,7 +753,7 @@
 %% -------------------------------------------------------------------------- %%
 %%  Loading pdflscape package for page rotation
 \RequirePackage{pdflscape}
-%%  Loading fancyhdr package to change page numbering
+%% Load fancyhdr to support landscape-page numbering.
 \RequirePackage{fancyhdr}
 %%  Loading sideways for sideways environment
 \RequirePackage{rotating}

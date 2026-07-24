@@ -1,5 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ncsu-accessibility}[2026/04/30 First-pass accessibility helpers for NC State ETDs]
+\ProvidesPackage{ncsu-accessibility}[2026/07/22 Accessibility helpers for NC State ETDs]
+
+%%----------------------------------------------------------------------------%%
+%% Package dependencies
+%%----------------------------------------------------------------------------%%
+%% These packages support the accessible figure, link, reminder, and table
+%% workflows used by the dissertation template.
 
 \RequirePackage{graphicx}
 \RequirePackage{xparse}
@@ -8,6 +14,10 @@
 \RequirePackage{tabularx}
 \RequirePackage{array}
 \RequirePackage{caption}
+
+%%----------------------------------------------------------------------------%%
+%% Accessible figure helpers
+%%----------------------------------------------------------------------------%%
 
 % Figure helper requiring alt text.
 % Usage:
@@ -23,7 +33,8 @@
 
 % Cropped figure helper requiring alt text.
 % Usage:
-% \accessiblefigurecropped[placement][width]{trim spec}{file}{alt text}{caption}{label}
+% \accessiblefigurecropped[placement][width]
+%   {trim spec}{file}{alt text}{caption}{label}
 \NewDocumentCommand{\accessiblefigurecropped}{O{htbp} O{\textwidth} m m m m m}{%
   \begin{figure}[#1]
     \centering
@@ -33,41 +44,38 @@
   \end{figure}%
 }
 
-% Use this for short, descriptive links. Avoid raw URLs in body text.
-% Usage: \accesslink{https://example.edu}{descriptive link text}
-\NewDocumentCommand{\accesslink}{m m}{\href{#1}{#2}}
+%%----------------------------------------------------------------------------%%
+%% Accessible link helper
+%%----------------------------------------------------------------------------%%
+%% Use this for short, descriptive links. Avoid raw URLs in body text.
+%% Usage:
+%% \accesslink{https://example.edu}{descriptive link text}
 
-% A small visible author reminder. Remove resolved reminders before submission.
+\NewDocumentCommand{\accesslink}{m m}{%
+  \href{#1}{#2}%
+}
+
+%%----------------------------------------------------------------------------%%
+%% Author reminder helper
+%%----------------------------------------------------------------------------%%
+%% This reminder is intentionally visible in draft output. Remove all resolved
+%% reminders before the dissertation is submitted.
+
 \NewDocumentCommand{\accessibilitytodo}{m}{%
-  \par\noindent\fbox{\begin{minipage}{0.95\linewidth}\textbf{Accessibility reminder:} #1\end{minipage}}\par%
+  \par
+  \noindent
+  \fbox{%
+    \begin{minipage}{0.95\linewidth}
+      \textbf{Accessibility reminder:} #1
+    \end{minipage}%
+  }%
+  \par
 }
-
 
 %%----------------------------------------------------------------------------%%
-%% Accessible chapter heading style
+%% Visual document formatting
 %%----------------------------------------------------------------------------%%
-%% The original NC State class inherits the default book-class numbered
-%% chapter heading, which is very large. This keeps the chapter structure
-%% semantic while using a more readable visual style.
+%% Required NC State chapter and heading formatting belongs in ncsuthesis.cls.
+%% This package intentionally does not redefine chapter or section commands.
 
-\makeatletter
-
-\renewcommand{\@makechapterhead}[1]{%
-  \vspace*{1.25\baselineskip}%
-  {\parindent \z@ \raggedright \normalfont
-    {\Large\bfseries Chapter \thechapter\par}%
-    \vspace{0.75\baselineskip}%
-    {\Large\bfseries #1\par}%
-    \vspace{1.75\baselineskip}%
-  }%
-}
-
-\renewcommand{\@makeschapterhead}[1]{%
-  \vspace*{1.5\baselineskip}%
-  {\parindent \z@ \raggedright \normalfont
-    {\Large\bfseries #1\par}%
-    \vspace{2\baselineskip}%
-  }%
-}
-
-\makeatother
+\endinput

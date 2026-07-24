@@ -88,46 +88,71 @@
 
 
 %% -------------------------------------------------------------------------- %%
-%% Optional: cleaner NC State chapter headings
+%% Optional: cleaner NC State numbered chapter headings
 %% -------------------------------------------------------------------------- %%
-%% This changes the visual appearance of chapter headings without changing the
-%% actual \chapter command. It avoids decorative chapter-heading packages.
+%% This changes the visual appearance of numbered chapter headings without
+%% changing the actual \chapter command. It avoids decorative chapter-heading
+%% packages.
 %%
-%% Chapter headers are one of the few places where NC State allows text size to
-%% differ from the body text.
+%% It deliberately leaves \chapter* headings unchanged. Therefore, preliminary
+%% headings such as ABSTRACT, DEDICATION, BIOGRAPHY, ACKNOWLEDGEMENTS, TABLE OF
+%% CONTENTS, LIST OF TABLES, and LIST OF FIGURES retain the official formatting
+%% defined in ncsuthesis.cls. Unnumbered headings such as REFERENCES and the
+%% APPENDICES divider page also retain the official class formatting.
 %%
-%% Turn this on or off with the toggle below.
+%% Numbered appendix headings still receive this style because LaTeX implements
+%% them as numbered chapters after \appendix.
+%%
+%% This option is disabled by default so that the official chapter-heading
+%% formatting in ncsuthesis.cls remains authoritative. Turn it on only when
+%% a deliberately different visual style is desired.
 
 \newif\ifNCSUUseOptionalChapterHeadings
 
 \NCSUUseOptionalChapterHeadingstrue
-% \NCSUUseOptionalChapterHeadingsfalse
+%\NCSUUseOptionalChapterHeadingsfalse
 
 \makeatletter
 
-\newcommand{\NCSUUseAccessibleChapterHeadings}{%
-  \renewcommand{\@makechapterhead}[1]{%
-    \vspace*{1.0in}%
-    {\parindent \z@ \raggedright \normalfont
-      \ifnum \c@secnumdepth >\m@ne
-        {\normalsize\bfseries\color{black}%
-        \MakeUppercase{\@chapapp}\space \thechapter\par}%
-        \vspace{0.25in}%
-      \fi
-      {\Large\bfseries ##1\par}%
-      \vspace{0.18in}%
-      {\color{black}\rule{0.45\textwidth}{0.8pt}\par}%
-      \vspace{0.75in}%
-    }%
-  }%
+\newcommand{\NCSUChapterTitleWithRule}[1]{%
+  #1\par\nobreak
+  \vspace{0.18in}%
+  {\color{black}\rule{0.45\textwidth}{0.8pt}}%
+}
 
-  \renewcommand{\@makeschapterhead}[1]{%
-    \vspace*{1.0in}%
-    {\parindent \z@ \raggedright \normalfont
-      {\Large\bfseries ##1\par}%
-      \vspace{0.18in}%
-      {\color{black}\rule{0.45\textwidth}{0.8pt}\par}%
-      \vspace{0.75in}%
+\newcommand{\NCSUUseAccessibleChapterHeadings}{%
+  \@ifundefined{ParseLaTeXeHeading}{%
+    %% Traditional LaTeX chapter driver.
+    \renewcommand{\@makechapterhead}[1]{%
+      \vspace*{1.0in}%
+      {\parindent \z@ \raggedright \normalfont
+        \ifnum \c@secnumdepth >\m@ne
+          {\normalsize\bfseries\color{black}%
+          \MakeUppercase{\@chapapp}\space \thechapter\par}%
+          \vspace{0.25in}%
+        \fi
+        {\Large\bfseries ##1\par}%
+        \vspace{0.18in}%
+        {\color{black}\rule{0.45\textwidth}{0.8pt}\par}%
+        \vspace{0.75in}%
+      }%
+    }%
+  }{%
+    %% LaTeX 2026 heading-template instance used by tagged-PDF builds.
+    \EditInstance{heading}{ncsu-chapter}{%
+      after-penalty-vspace = 1.0in,
+      after-vspace         = 0.75in,
+      prefix               = \MakeUppercase{\@chapapp},
+      heading-decls        = \raggedright\parindent\z@\normalfont,
+      prefix-decls         = \normalsize\bfseries\color{black},
+      number-decls         = \normalsize\bfseries\color{black},
+      title-decls          = \Large\bfseries
+    }%
+    \EditInstance{headformat}{ncsu-chapter}{%
+      heading-indent    = 0pt,
+      prefix-number-sep = \WordSpaceAmount{1},
+      number-title-sep  = 0.25in,
+      title-format      = {\NCSUChapterTitleWithRule{##1}}%
     }%
   }%
 }

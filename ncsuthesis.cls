@@ -82,7 +82,7 @@
 \addtolength{\ncsu@footskip}{2\baselineskip}
 \addtolength{\ncsu@footskip}{0.5ex}  % A little extra space to ensure there
                                      %  are 2 full double spaced lines
-\RequirePackage[margin=1in]{geometry}
+\RequirePackage[top=1in,bottom=1in,left=1in,right=1in,heightrounded]{geometry}
                 
 %% -------------------------------------------------------------------------- %%
 
